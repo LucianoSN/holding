@@ -11,8 +11,8 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="GlobalGroup\UseCases\Command\" />
-      <Folder Include="GlobalGroup\UseCases\Handlers\" />
+      <Folder Include="Company\UseCases\Command\" />
+      <Folder Include="Company\UseCases\Handlers\" />
     </ItemGroup>
 
 </Project>
