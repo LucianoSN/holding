@@ -12,7 +12,7 @@ public class CompanyRepository(DataContext context) : ICompanyRepository
         context?.Dispose();
     }
 
-    public IUnitOfWork UnitOfWork => context;
+    public IUnitOfWork Persist => context;
 
     #region Company
 
@@ -74,7 +74,7 @@ public class CompanyRepository(DataContext context) : ICompanyRepository
     {
         return await context.Holdings
             .AsNoTracking()
-            .FirstAsync(HoldingQueries.GetById(id));
+            .FirstOrDefaultAsync(HoldingQueries.GetById(id));
     }
 
     public async Task<IEnumerable<Company.Domain.Company.Entities.Holding>>? GetHoldingByName(string name)

@@ -3,20 +3,20 @@ using Holding.Company.Domain.Company.UseCases.Commands;
 using Holding.Company.Domain.Company.UseCases.Handlers;
 using Holding.Data.Contexts;
 using Holding.Data.Repositories;
+using MediatR;
 
 namespace Holding.Tests.Domain.Company;
 
 [TestClass]
 public class CreateHoldingHandlerTest
 {
-    private DataContext _dataContext;
     private ICompanyRepository _repository;
     private readonly CreateHoldingHandler _sut;
 
     public CreateHoldingHandlerTest()
     {
-        _dataContext = new DataContext();
-        _repository = new CompanyRepository(_dataContext);
+        _repository = Helper.GetRequiredService<ICompanyRepository>();
+        
         _sut = new CreateHoldingHandler(_repository);
     }
 
@@ -28,7 +28,7 @@ public class CreateHoldingHandlerTest
 
         // Act
         var result = await _sut.Handle(command, CancellationToken.None);
-        if (result.Success) await _dataContext.Commit();
+        if (result.Success) await _repository.Persist.Commit();
         var holdings = await _repository.GetHoldingById((result.Data as Holding.Company.Domain.Company.Entities.Holding).Id);
 
         // Assert
