@@ -6,6 +6,6 @@
 	<s:Boolean x:Key="/Default/Environment/InlayHints/GeneralInlayHintsOptions/EnableInlayHints/@EntryValue">False</s:Boolean>
 	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=06d7a529_002D30f6_002D4596_002Db686_002D16c75fcafdc5/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="ShoudReturnInvalidWhenCommandIsInvalid" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
   &lt;TestAncestor&gt;&#xD;
-    &lt;TestId&gt;MSTest::C0484267-BA69-41AB-946A-D9222DE4052E::net8.0::Holding.Tests.Domain.Company.CreateHoldingHandlerTest.ShouldCreateHoldingIsValid&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;MSTest::C0484267-BA69-41AB-946A-D9222DE4052E::net8.0::Holding.Tests.Domain.Company.CreateHoldingHandlerTest&lt;/TestId&gt;&#xD;
   &lt;/TestAncestor&gt;&#xD;
 &lt;/SessionState&gt;</s:String></wpf:ResourceDictionary>

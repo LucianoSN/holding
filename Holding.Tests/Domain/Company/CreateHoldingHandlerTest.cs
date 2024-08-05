@@ -9,9 +9,9 @@ namespace Holding.Tests.Domain.Company;
 [TestClass]
 public class CreateHoldingHandlerTest
 {
-    private readonly CreateHoldingHandler _sut;
     private DataContext _dataContext;
     private ICompanyRepository _repository;
+    private readonly CreateHoldingHandler _sut;
 
     public CreateHoldingHandlerTest()
     {
@@ -29,11 +29,23 @@ public class CreateHoldingHandlerTest
         // Act
         var result = await _sut.Handle(command, CancellationToken.None);
         if (result.Success) await _dataContext.Commit();
-
         var holdings = await _repository.GetHoldingById((result.Data as Holding.Company.Domain.Company.Entities.Holding).Id);
 
         // Assert
         Assert.AreEqual(result.Success, true);
         Assert.IsNotNull(holdings);
+    }
+    
+    [TestMethod]
+    public async Task ShouldCreateHoldingIsInvalid()
+    {
+        // Arrange
+        var command = new CreateHoldingCommand("");
+
+        // Act
+        var result = await _sut.Handle(command, CancellationToken.None);
+
+        // Assert
+        Assert.AreEqual(result.Success, false);
     }
 } 

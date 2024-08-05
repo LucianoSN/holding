@@ -7,7 +7,7 @@ namespace Holding.Company.Domain.Company.UseCases.Commands;
 
 public class CreateHoldingCommand : Notifiable<Notification>, IRequest<GenericCommandResult>
 {
-    public CreateHoldingCommand(string name, string? description)
+    public CreateHoldingCommand(string name, string? description = null)
     {
         Name = name;
         Description = description;
