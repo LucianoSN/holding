@@ -12,7 +12,7 @@ public class CompanyRepository(DataContext context) : ICompanyRepository
         context?.Dispose();
     }
 
-    public IUnitOfWork Persist => context;
+    public IUnitOfWork Transact => context;
 
     #region Company
 

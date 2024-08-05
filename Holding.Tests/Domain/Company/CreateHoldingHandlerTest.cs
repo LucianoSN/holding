@@ -28,7 +28,7 @@ public class CreateHoldingHandlerTest
 
         // Act
         var result = await _sut.Handle(command, CancellationToken.None);
-        if (result.Success) await _repository.Persist.Commit();
+        if (result.Success) await _repository.Transact.Commit();
         var holdings = await _repository.GetHoldingById((result.Data as Holding.Company.Domain.Company.Entities.Holding).Id);
 
         // Assert
