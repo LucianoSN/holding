@@ -1,10 +1,10 @@
 ﻿namespace Holding.Core.DomainObjects.Results;
 
-public class GenericCommandResult<TData> : ICommandResult
+public class GenericCommandResult : ICommandResult
 {
    public GenericCommandResult() { }
    
-   public GenericCommandResult(TData? data, bool success = false, string? message = null)
+   public GenericCommandResult(object? data, bool success = false, string? message = null)
    {
       Success = success;
       Message = message;
@@ -13,5 +13,5 @@ public class GenericCommandResult<TData> : ICommandResult
 
    public bool Success { get; set; }
    public string? Message { get; set; }
-   public TData? Data { get; set; }
+   public object? Data { get; set; }
 }

@@ -1,9 +1,9 @@
 ﻿namespace Holding.Core.DomainObjects.Results;
 
-public class PagedCommandResult<TData> : GenericCommandResult<TData>
+public class PagedCommandResult : GenericCommandResult
 {
     public PagedCommandResult(
-        TData? data,
+        object? data,
         int totalCount, 
         int currentPage = 1, 
         int pageSize = 25
@@ -16,7 +16,7 @@ public class PagedCommandResult<TData> : GenericCommandResult<TData>
     }
     
     public PagedCommandResult(
-        TData? data,
+        object? data,
         bool success = false,
         string? message = null
     ) : base(data, success, message)
