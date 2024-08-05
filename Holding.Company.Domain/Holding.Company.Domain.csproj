@@ -11,7 +11,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Company\UseCases\Command\" />
+      <Folder Include="Company\UseCases\Commands\" />
       <Folder Include="Company\UseCases\Handlers\" />
     </ItemGroup>
 
