@@ -13,7 +13,6 @@ public class CreateHoldingHandlerTest
     public CreateHoldingHandlerTest()
     {
         _repository = Helper.GetRequiredService<ICompanyRepository>();
-        
         _sut = new CreateHoldingHandler(_repository);
     }
 
