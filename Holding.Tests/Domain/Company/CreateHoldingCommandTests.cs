@@ -1,6 +1,6 @@
 ﻿using Holding.Company.Domain.Company.UseCases.Commands;
 
-namespace Holding.Tests.CommandTests.Company;
+namespace Holding.Tests.Domain.Company;
 
 [TestClass]
 public class CreateHoldingCommandTests

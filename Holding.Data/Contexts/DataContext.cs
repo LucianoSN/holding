@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Holding.Data.Contexts;
 
-public class DataContext(DbContextOptions<DataContext> options) : DbContext(options), IUnitOfWork
+public class DataContext : DbContext, IUnitOfWork
 {
    public DbSet<Company.Domain.Company.Entities.Holding> Holdings { get; set; }
    
