@@ -9,6 +9,5 @@ public class Holding(string name, string? description = null) : Entity
     
     public void ChangeName(string name) => Name = name;
     public void ChangeDescription(string? description) => Description = description;
-    
     public bool IsAccessible() => Active;
 }
