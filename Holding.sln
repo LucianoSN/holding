@@ -1,8 +1,30 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{B5180828-E59E-4E37-ACE7-9EC246FAF2BF}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WebApps", "WebApps", "{2CB0700C-D523-4A2B-8847-A0B48F2B6FF3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Holding.Company.Domain", "Holding.Company.Domain\Holding.Company.Domain.csproj", "{64E32D49-B021-4E56-A1D1-1FDAC3B6260F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Holding.Core", "Holding.Core\Holding.Core.csproj", "{C4CADB47-C7EB-4944-8B4C-1D3446A97C8A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{64E32D49-B021-4E56-A1D1-1FDAC3B6260F} = {B5180828-E59E-4E37-ACE7-9EC246FAF2BF}
+		{C4CADB47-C7EB-4944-8B4C-1D3446A97C8A} = {B5180828-E59E-4E37-ACE7-9EC246FAF2BF}
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{64E32D49-B021-4E56-A1D1-1FDAC3B6260F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{64E32D49-B021-4E56-A1D1-1FDAC3B6260F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{64E32D49-B021-4E56-A1D1-1FDAC3B6260F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{64E32D49-B021-4E56-A1D1-1FDAC3B6260F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C4CADB47-C7EB-4944-8B4C-1D3446A97C8A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C4CADB47-C7EB-4944-8B4C-1D3446A97C8A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C4CADB47-C7EB-4944-8B4C-1D3446A97C8A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C4CADB47-C7EB-4944-8B4C-1D3446A97C8A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
