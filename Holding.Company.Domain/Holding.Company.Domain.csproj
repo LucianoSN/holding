@@ -13,6 +13,8 @@
     <ItemGroup>
       <Folder Include="Company\UseCases\Commands\" />
       <Folder Include="Company\UseCases\Handlers\" />
+      <Folder Include="Division\Queries\" />
+      <Folder Include="Division\UseCases\" />
     </ItemGroup>
 
 </Project>
