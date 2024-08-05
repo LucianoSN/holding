@@ -1,6 +1,7 @@
 ﻿using Holding.Company.Domain.Company.Queries;
 using Holding.Core.Data;
 using Holding.Data.Contexts;
+using Microsoft.EntityFrameworkCore;
 
 namespace Holding.Data.Repositories;
 
@@ -12,7 +13,9 @@ public class CompanyRepository(DataContext context) : ICompanyRepository
     }
 
     public IUnitOfWork UnitOfWork => context;
-    
+
+    #region Company
+
     public Task Create(Company.Domain.Company.Entities.Company company)
     {
         throw new NotImplementedException();
@@ -28,7 +31,7 @@ public class CompanyRepository(DataContext context) : ICompanyRepository
         throw new NotImplementedException();
     }
 
-    public Task<Company.Domain.Company.Entities.Company>? GetCompanyByName(string name)
+    public Task<IEnumerable<Company.Domain.Company.Entities.Company>>? GetCompanyByName(string name)
     {
         throw new NotImplementedException();
     }
@@ -53,38 +56,61 @@ public class CompanyRepository(DataContext context) : ICompanyRepository
         throw new NotImplementedException();
     }
 
-    public Task Create(Company.Domain.Company.Entities.Holding holding)
+    #endregion
+
+    #region Holding
+
+    public async Task Create(Company.Domain.Company.Entities.Holding holding)
     {
-        throw new NotImplementedException();
+        await context.Holdings.AddAsync(holding);
     }
 
-    public Task Update(Company.Domain.Company.Entities.Holding holding)
+    public async Task Update(Company.Domain.Company.Entities.Holding holding)
     {
-        throw new NotImplementedException();
+        await Task.Run(() => context.Holdings.Update(holding));
     }
 
-    public Task<Company.Domain.Company.Entities.Holding>? GetHoldingById(Guid id)
+    public async Task<Company.Domain.Company.Entities.Holding>? GetHoldingById(Guid id)
     {
-        throw new NotImplementedException();
+        return await context.Holdings
+            .AsNoTracking()
+            .FirstAsync(HoldingQueries.GetById(id));
     }
 
-    public Task<Company.Domain.Company.Entities.Holding>? GetHoldingByName(string name)
+    public async Task<IEnumerable<Company.Domain.Company.Entities.Holding>>? GetHoldingByName(string name)
     {
-        throw new NotImplementedException();
+        return await context.Holdings
+            .AsNoTracking()
+            .Where(HoldingQueries.GetByName(name))
+            .OrderBy(x => x.Name)
+            .ToListAsync();
     }
 
-    public Task<IEnumerable<Company.Domain.Company.Entities.Holding>> GetAllHolding()
+    public async Task<IEnumerable<Company.Domain.Company.Entities.Holding>> GetAllHolding()
     {
-        throw new NotImplementedException();
+        return await context.Holdings
+            .AsNoTracking()
+            .OrderBy(x => x.Name)
+            .ToListAsync();
     }
 
-    public Task<IEnumerable<Company.Domain.Company.Entities.Holding>> GetAllHoldingActivated()
+    public async Task<IEnumerable<Company.Domain.Company.Entities.Holding>> GetAllHoldingActivated()
     {
-        throw new NotImplementedException();
+        return await context.Holdings
+            .AsNoTracking()
+            .Where(HoldingQueries.GetAllActivated())
+            .OrderBy(x => x.Name)
+            .ToListAsync();
     }
 
-    public Task<IEnumerable<Company.Domain.Company.Entities.Holding>> GetAllHoldingDeactivated()
+    public async Task<IEnumerable<Company.Domain.Company.Entities.Holding>> GetAllHoldingDeactivated()
     {
-        throw new NotImplementedException();
+        return await context.Holdings
+            .AsNoTracking()
+            .Where(HoldingQueries.GetAllDeactivated())
+            .OrderBy(x => x.Name)
+            .ToListAsync();
     }
+
+    #endregion
 }
