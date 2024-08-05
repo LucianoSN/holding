@@ -1,9 +1,6 @@
 ﻿using Holding.Company.Domain.Company.Queries;
 using Holding.Company.Domain.Company.UseCases.Commands;
 using Holding.Company.Domain.Company.UseCases.Handlers;
-using Holding.Data.Contexts;
-using Holding.Data.Repositories;
-using MediatR;
 
 namespace Holding.Tests.Domain.Company;
 
