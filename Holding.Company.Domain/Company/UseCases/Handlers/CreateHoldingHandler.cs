@@ -8,23 +8,21 @@ namespace Holding.Company.Domain.Company.UseCases.Handlers;
 public class CreateHoldingHandler(ICompanyRepository repository)
     : IRequestHandler<CreateHoldingCommand, GenericCommandResult>
 {
-    public Task<GenericCommandResult> Handle(CreateHoldingCommand command,
+    public async Task<GenericCommandResult> Handle(CreateHoldingCommand command,
         CancellationToken cancellationToken)
     {
         // Fast Fail Validation
         if (!command.IsValid)
         {
-            return Task.FromResult(
-                new GenericCommandResult(command.Notifications, false, "Ops, this holding is invalid")
-            );
+            return new GenericCommandResult(command.Notifications, false, "Ops, this holding is invalid");
         }
 
         // Generate the Holding
         var holding = command.ToEntity();
 
         // Save in the database
-        repository.Create(holding);
+        await repository.Create(holding);
 
-        return Task.FromResult(new GenericCommandResult(holding, true, "Holding created"));
+        return new GenericCommandResult(holding, true, "Holding created");
     }
 }
