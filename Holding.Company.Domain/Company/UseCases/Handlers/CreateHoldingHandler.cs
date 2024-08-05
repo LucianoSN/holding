@@ -5,7 +5,8 @@ using MediatR;
 
 namespace Holding.Company.Domain.Company.UseCases.Handlers;
 
-public class CreateHoldingHandler(ICompanyRepository repository) : IRequestHandler<CreateHoldingCommand, GenericCommandResult>
+public class CreateHoldingHandler(ICompanyRepository repository)
+    : IRequestHandler<CreateHoldingCommand, GenericCommandResult>
 {
     public Task<GenericCommandResult> Handle(CreateHoldingCommand command,
         CancellationToken cancellationToken)
@@ -13,16 +14,17 @@ public class CreateHoldingHandler(ICompanyRepository repository) : IRequestHandl
         // Fast Fail Validation
         if (!command.IsValid)
         {
-            return Task.FromResult(new GenericCommandResult(command.Notifications, false,
-                "Ops, this holding is invalid"));
+            return Task.FromResult(
+                new GenericCommandResult(command.Notifications, false, "Ops, this holding is invalid")
+            );
         }
-        
+
         // Generate the Holding
         var holding = command.ToEntity();
-        
+
         // Save in the database
         repository.Create(holding);
-        
+
         return Task.FromResult(new GenericCommandResult(holding, true, "Holding created"));
     }
 }
