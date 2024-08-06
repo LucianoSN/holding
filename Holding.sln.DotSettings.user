@@ -13,6 +13,7 @@
       &lt;TestId&gt;MSTest::C0484267-BA69-41AB-946A-D9222DE4052E::net8.0::Holding.Tests.Domain.Company.ChangeHoldingCommandTests.ShoudReturnInvalidWhenCommandIsInvalid&lt;/TestId&gt;&#xD;
       &lt;TestId&gt;MSTest::C0484267-BA69-41AB-946A-D9222DE4052E::net8.0::Holding.Tests.Domain.Company.ChangeHoldingCommandTests.ShoudReturnInvalidWhenGuidIsInvalid&lt;/TestId&gt;&#xD;
       &lt;TestId&gt;MSTest::C0484267-BA69-41AB-946A-D9222DE4052E::net8.0::Holding.Tests.Domain.Company.ChangeHoldingCommandTests&lt;/TestId&gt;&#xD;
+      &lt;TestId&gt;MSTest::C0484267-BA69-41AB-946A-D9222DE4052E::net8.0::Holding.Tests.Domain.Company.ChangeHoldingHandlerTests.ShoudReturnValidWhenUpdateIsValid&lt;/TestId&gt;&#xD;
     &lt;/TestAncestor&gt;&#xD;
     &lt;ProjectFile&gt;C0484267-BA69-41AB-946A-D9222DE4052E/d:Domain/d:Company/f:CreateHoldingCommandTests.cs&lt;/ProjectFile&gt;&#xD;
   &lt;/Or&gt;&#xD;

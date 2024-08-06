@@ -96,15 +96,12 @@ public class CompanyRepository(DataContext context) : ICompanyRepository
 
     public async Task<Company.Domain.Company.Entities.Holding>? GetHoldingById(Guid id)
     {
-        return await context.Holdings
-            .AsNoTracking()
-            .FirstOrDefaultAsync(HoldingQueries.GetById(id));
+        return await context.Holdings.FirstOrDefaultAsync(HoldingQueries.GetById(id));
     }
 
     public async Task<IEnumerable<Company.Domain.Company.Entities.Holding>>? GetHoldingByName(string name)
     {
         return await context.Holdings
-            .AsNoTracking()
             .Where(HoldingQueries.GetByName(name))
             .OrderBy(x => x.Name)
             .ToListAsync();
