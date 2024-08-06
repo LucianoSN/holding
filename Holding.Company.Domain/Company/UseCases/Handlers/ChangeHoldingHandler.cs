@@ -24,7 +24,7 @@ public class ChangeHoldingHandler(ICompanyRepository repository)
         
         // Update the holding
         holding.ChangeName(command.Name);
-        holding.ChangeDescription(command.Name);
+        holding.ChangeDescription(command.Description);
 
         // Save in the database
         await repository.Update(holding);
