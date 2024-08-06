@@ -16,30 +16,34 @@ public class CompanyRepository(DataContext context) : ICompanyRepository
 
     #region Company
 
-    public async Task Create(Company.Domain.Company.Entities.Company company)
+    public Task Create(Company.Domain.Company.Entities.Company company)
     {
-        await context.Companies.AddAsync(company);
+        // await context.Companies.AddAsync(company);
+        throw new NotImplementedException();
     }
 
-    public async Task Update(Company.Domain.Company.Entities.Company company)
+    public Task Update(Company.Domain.Company.Entities.Company company)
     {
-        await Task.Run(() => context.Companies.Update(company));
+        // await Task.Run(() => context.Companies.Update(company));
+        throw new NotImplementedException();
     }
 
-    public async Task<Company.Domain.Company.Entities.Company>? GetCompanyById(Guid id)
+    public Task<Company.Domain.Company.Entities.Company>? GetCompanyById(Guid id)
     {
-        return await context.Companies
-            .AsNoTracking()
-            .FirstOrDefaultAsync(CompanyQueries.GetById(id));
+        // return await context.Companies
+        //     .AsNoTracking()
+        //     .FirstOrDefaultAsync(CompanyQueries.GetById(id));
+        throw new NotImplementedException();
     }
 
-    public async Task<IEnumerable<Company.Domain.Company.Entities.Company>>? GetCompanyByName(string name)
+    public Task<IEnumerable<Company.Domain.Company.Entities.Company>>? GetCompanyByName(string name)
     {
-        return await context.Companies
-            .AsNoTracking()
-            .Where(CompanyQueries.GetByName(name))
-            .OrderBy(x => x.Name)
-            .ToListAsync();
+        // return await context.Companies
+        //     .AsNoTracking()
+        //     .Where(CompanyQueries.GetByName(name))
+        //     .OrderBy(x => x.Name)
+        //     .ToListAsync();
+        throw new NotImplementedException();
     }
 
     public Task<IEnumerable<Company.Domain.Company.Entities.Company>> GetCompanyByHoldingId(Guid holdingId)
@@ -47,30 +51,33 @@ public class CompanyRepository(DataContext context) : ICompanyRepository
         throw new NotImplementedException();
     }
 
-    public async Task<IEnumerable<Company.Domain.Company.Entities.Company>> GetAllCompanies()
+    public Task<IEnumerable<Company.Domain.Company.Entities.Company>> GetAllCompanies()
     {
-        return await context.Companies
-            .AsNoTracking()
-            .OrderBy(x => x.Name)
-            .ToListAsync();
+        // return await context.Companies
+        //     .AsNoTracking()
+        //     .OrderBy(x => x.Name)
+        //     .ToListAsync();
+        throw new NotImplementedException();
     }
 
-    public async Task<IEnumerable<Company.Domain.Company.Entities.Company>> GetAllCompaniesActivated()
+    public Task<IEnumerable<Company.Domain.Company.Entities.Company>> GetAllCompaniesActivated()
     {
-        return await context.Companies
-            .AsNoTracking()
-            .Where(CompanyQueries.GetAllActivated())
-            .OrderBy(x => x.Name)
-            .ToListAsync();
+        // return await context.Companies
+        //     .AsNoTracking()
+        //     .Where(CompanyQueries.GetAllActivated())
+        //     .OrderBy(x => x.Name)
+        //     .ToListAsync();
+        throw new NotImplementedException();
     }
 
-    public async Task<IEnumerable<Company.Domain.Company.Entities.Company>> GetAllCompaniesDeactivated()
+    public Task<IEnumerable<Company.Domain.Company.Entities.Company>> GetAllCompaniesDeactivated()
     {
-        return await context.Companies
-            .AsNoTracking()
-            .Where(CompanyQueries.GetAllDeactivated())
-            .OrderBy(x => x.Name)
-            .ToListAsync();
+        // return await context.Companies
+        //     .AsNoTracking()
+        //     .Where(CompanyQueries.GetAllDeactivated())
+        //     .OrderBy(x => x.Name)
+        //     .ToListAsync();
+        throw new NotImplementedException();
     }
 
     #endregion
