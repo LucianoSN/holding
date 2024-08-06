@@ -2,7 +2,7 @@
 
 namespace Holding.Core.Helpers;
 
-public static class xParser
+public static class Parser
 {
     public static bool IsGuid(this string stringValue)
     {
@@ -12,5 +12,11 @@ public static class xParser
         
         var guidRegEx = new Regex(guidPattern);
         return guidRegEx.IsMatch(stringValue);
+    }
+    
+    public static Guid ToGuid(this string stringValue)
+    {
+        if (!IsGuid(stringValue)) return Guid.Empty;
+        return Guid.Parse(stringValue);
     }
 }

@@ -1,19 +1,23 @@
 ﻿using Flunt.Notifications;
 using Holding.Company.Domain.Company.UseCases.Commands.Validations;
 using Holding.Core.DomainObjects.Results;
+using Holding.Core.Helpers;
 using MediatR;
 
 namespace Holding.Company.Domain.Company.UseCases.Commands;
 
 public class ChangeHoldingCommand : Notifiable<Notification>, IRequest<GenericCommandResult>
 {
-    public ChangeHoldingCommand(Guid id, string name, string? description = null)
+    public ChangeHoldingCommand(string id, string name, string? description = null)
     {
-        Id = id;
+        Id = Parser.ToGuid(id); 
         Name = name;
         Description = description;
         
         AddNotifications(new ChangeHoldingValidation(this));
+
+        if (!Parser.IsGuid(id))
+            AddNotification("Id", "Id is invalid");
     }
 
     public Guid Id { get; private set; }
