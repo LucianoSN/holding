@@ -1,6 +1,6 @@
 ﻿using Holding.Core.Helpers;
 
-namespace Holding.Core.Validations;
+namespace Holding.Core.Validations.Notifications;
 
 public partial class CustomNotification
 {

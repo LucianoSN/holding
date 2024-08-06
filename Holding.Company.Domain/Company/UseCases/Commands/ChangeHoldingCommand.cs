@@ -2,7 +2,7 @@
 using Holding.Company.Domain.Company.UseCases.Commands.Validations;
 using Holding.Core.DomainObjects.Results;
 using Holding.Core.Helpers;
-using Holding.Core.Validations;
+using Holding.Core.Validations.Notifications;
 using MediatR;
 
 namespace Holding.Company.Domain.Company.UseCases.Commands;

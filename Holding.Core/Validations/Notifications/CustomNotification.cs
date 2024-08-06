@@ -1,6 +1,6 @@
 ﻿using Flunt.Notifications;
 
-namespace Holding.Core.Validations;
+namespace Holding.Core.Validations.Notifications;
 
 public partial class CustomNotification : Notifiable<Notification>
 {
