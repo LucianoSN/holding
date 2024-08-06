@@ -15,6 +15,19 @@ public class CreateHoldingHandlerTest
         _repository = Helper.GetRequiredService<ICompanyRepository>();
         _sut = new CreateHoldingHandler(_repository);
     }
+    
+    [TestMethod]
+    public async Task ShouldCreateHoldingIsInvalid()
+    {
+        // Arrange
+        var command = new CreateHoldingCommand("");
+
+        // Act
+        var result = await _sut.Handle(command, CancellationToken.None);
+
+        // Assert
+        Assert.AreEqual(result.Success, false);
+    }
 
     [TestMethod]
     public async Task ShouldCreateHoldingIsValid()
@@ -30,18 +43,5 @@ public class CreateHoldingHandlerTest
         // Assert
         Assert.AreEqual(result.Success, true);
         Assert.IsNotNull(holdings);
-    }
-    
-    [TestMethod]
-    public async Task ShouldCreateHoldingIsInvalid()
-    {
-        // Arrange
-        var command = new CreateHoldingCommand("");
-
-        // Act
-        var result = await _sut.Handle(command, CancellationToken.None);
-
-        // Assert
-        Assert.AreEqual(result.Success, false);
     }
 } 
