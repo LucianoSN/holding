@@ -16,7 +16,7 @@ public class ChangeHoldingCommand : Notifiable<Notification>, IRequest<GenericCo
         Description = description;
         
         AddNotifications(new ChangeHoldingValidation(this));
-        new CustomNotification().IsGuid(id, "Id", "Id is invalid");
+        AddNotifications(new CustomNotification().IsGuid(id, "Id", "Id is invalid"));
     }
 
     public Guid Id { get; private set; }

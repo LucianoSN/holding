@@ -18,7 +18,7 @@ public class ChangeHoldingCommandTests
    [TestMethod]
    public void ShoudReturnInvalidWhenGuidIsInvalid()
    {
-       var command = Sut("00-93343-00", "", "");
+       var command = Sut("00-93343-00");
        Assert.AreEqual(command.IsValid, false);
    }
    
