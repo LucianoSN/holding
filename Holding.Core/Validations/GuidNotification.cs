@@ -4,7 +4,7 @@ namespace Holding.Core.Validations;
 
 public partial class CustomNotification
 {
-    public void AddGuidNotification(string guidValue, string key, string message)
+    public void IsGuid(string guidValue, string key, string message)
     {
         if (!Parser.IsGuid(guidValue))
             AddNotification(key, message);
