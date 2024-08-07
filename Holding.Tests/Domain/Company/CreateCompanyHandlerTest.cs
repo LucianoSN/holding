@@ -55,4 +55,20 @@ public class CreateCompanyHandlerTest
         // Assert
         Assert.AreEqual(result.Success, false);
     }
+    
+    [TestMethod]
+    public async Task ShouldCreateCompanyIsValid()
+    {
+        // Arrange
+        var command = SutCommand(Guid.NewGuid().ToString());
+
+        // Act
+        var result = await _sut.Handle(command, CancellationToken.None);
+        if (result.Success) await _repository.Transact.Commit();
+        var company = await _repository.GetCompanyById((result.Data as Holding.Company.Domain.Company.Entities.Company).Id);
+
+        // Assert
+        Assert.AreEqual(result.Success, true);
+        Assert.IsNotNull(company);
+    }
 }
