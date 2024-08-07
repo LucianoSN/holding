@@ -42,6 +42,8 @@ public class CompanyRepository(DataContext context) : ICompanyRepository
     public async Task<IEnumerable<Company.Domain.Company.Entities.Company>> GetCompanyByHoldingId(Guid holdingId)
     {
         return await context.Companies
+            .AsNoTracking()
+            .Include(x => x.Holding)
             .Where(CompanyQueries.GetByHoldingId(holdingId))
             .ToListAsync();
     }
