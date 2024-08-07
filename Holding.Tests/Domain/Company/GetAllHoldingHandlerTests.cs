@@ -18,14 +18,14 @@ public class GetAllHoldingHandlerTests
         _getAllSut = new GetAllHoldingHandler(_repository);
     }
 
-    private async Task<Holding.Company.Domain.Company.Entities.Holding> CreateHoldingSut(
+    private async Task CreateHoldingSut(
         string name,
         string description = "")
     {
         var command = new CreateHoldingCommand(name, description);
         var result = await _createSut.Handle(command, CancellationToken.None);
         if (result.Success) await _repository.Transact.Commit();
-        return await _repository.GetHoldingById((result.Data as Holding.Company.Domain.Company.Entities.Holding).Id);
+        await _repository.GetHoldingById((result.Data as Holding.Company.Domain.Company.Entities.Holding).Id);
     }
     
     [TestMethod]
