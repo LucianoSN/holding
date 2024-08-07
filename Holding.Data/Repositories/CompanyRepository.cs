@@ -107,7 +107,7 @@ public class CompanyRepository(DataContext context) : ICompanyRepository
             .ToListAsync();
     }
 
-    public async Task<IEnumerable<Company.Domain.Company.Entities.Holding>> GetAllHolding()
+    public async Task<IEnumerable<Company.Domain.Company.Entities.Holding>> GetAllHoldings()
     {
         return await context.Holdings
             .AsNoTracking()

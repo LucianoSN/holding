@@ -23,7 +23,7 @@ public interface ICompanyRepository : IRepository<Entities.Company>
     Task Update(Entities.Holding holding);
     Task<Entities.Holding>? GetHoldingById(Guid id);
     Task<IEnumerable<Entities.Holding>>? GetHoldingByName(string name);
-    Task<IEnumerable<Entities.Holding>> GetAllHolding();
+    Task<IEnumerable<Entities.Holding>> GetAllHoldings();
     Task<IEnumerable<Entities.Holding>> GetAllHoldingActivated();
     Task<IEnumerable<Entities.Holding>> GetAllHoldingDeactivated();
 
