@@ -1,3 +1,3 @@
 ﻿namespace Holding.Core.ValueObjects;
 
-public record Contact(string Name, string Email, string Phone);
+public record Contact(string FullName, string Email, string Phone);
