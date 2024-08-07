@@ -6,12 +6,12 @@ public static class CompanyQueries
 {
     public static Expression<Func<Entities.Company, bool>> GetById(Guid id)
     {
-        return x => x.Id == id;
+        return x => x.Id == id && x.Active;
     }
     
     public static Expression<Func<Entities.Company, bool>> GetByHoldingId(Guid holdingId)
     {
-        return x => x.HoldingId == holdingId;
+        return x => x.HoldingId == holdingId && x.Active;
     }
     
     public static Expression<Func<Entities.Company, bool>> GetByName(string name)
