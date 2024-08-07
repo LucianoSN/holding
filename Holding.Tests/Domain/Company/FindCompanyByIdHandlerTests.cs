@@ -62,4 +62,19 @@ public class FindCompanyByIdHandlerTests
         Assert.AreEqual(command.IsValid, true);
         Assert.AreEqual(result.Success, true);
     }
+    
+    [TestMethod]
+    public async Task ShoudReturnInvalidWhenFindHoldingByIdNotFound()
+    {
+        // Arrange
+        var command = new FindCompanyByIdCommand(Guid.NewGuid().ToString());
+
+        // Act
+        var result = await _findSut.Handle(command, CancellationToken.None);
+
+        // Assert
+        Assert.AreEqual(command.IsValid, true);
+        Assert.AreEqual(result.Success, false);
+        Assert.IsNull(result.Data);
+    }
 }
