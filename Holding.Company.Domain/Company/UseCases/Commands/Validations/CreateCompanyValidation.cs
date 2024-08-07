@@ -11,9 +11,9 @@ public class CreateCompanyValidation : Contract<CreateCompanyCommand>
             .IsGreaterOrEqualsThan(command.Name.Length, 3, "Name", "Name must be at least 3 characters")
             .IsLowerOrEqualsThan(command.Name.Length, 80, "Name", "Name must be at most 80 characters")
             
-            .IsNotNullOrEmpty(command.AddressCountry, "AddressCountry", "AddressName is required")
-            .IsGreaterOrEqualsThan(command.Name.Length, 3, "AddressName", "AddressName must be at least 3 characters")
-            .IsLowerOrEqualsThan(command.Name.Length, 80, "AddressName", "AddressName must be at most 80 characters")
+            .IsNotNullOrEmpty(command.AddressCountry, "AddressCountry", "AddressCountry is required")
+            .IsGreaterOrEqualsThan(command.AddressCountry.Length, 3, "AddressCountry", "AddressName must be at least 3 characters")
+            .IsLowerOrEqualsThan(command.AddressCountry.Length, 80, "AddressCountry", "AddressName must be at most 80 characters")
             
             .IsNotNullOrEmpty(command.AddressPostalCode, "AddressPostalCode", "AddressPostalCode is required")
             .IsGreaterOrEqualsThan(command.AddressPostalCode.Length, 3, "AddressPostalCode", "AddressPostalCode must be at least 3 characters")

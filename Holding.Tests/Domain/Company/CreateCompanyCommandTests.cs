@@ -33,16 +33,23 @@ public class CreateCompanyCommandTests
     }
 
     [TestMethod]
+    public void ShoudReturnValidWhenCommandIsValid()
+    {
+        var command = Sut(Guid.NewGuid().ToString());
+        Assert.AreEqual(command.IsValid, true);
+    }
+
+    [TestMethod]
     public void ShoudReturnInvalidWhenCommandIsInvalid()
     {
         var command = Sut("");
         Assert.AreEqual(command.IsValid, false);
     }
-    
-   [TestMethod]
-   public void ShoudReturnValidWhenCommandIsValid()
-   {
-       var command = Sut(Guid.NewGuid().ToString());
-       Assert.AreEqual(command.IsValid, true);
-   }
+
+    [TestMethod]
+    public void ShoudReturnInvalidWhenCompanyNameIsEmpty()
+    {
+        var command = Sut(Guid.NewGuid().ToString(), string.Empty);
+        Assert.AreEqual(command.IsValid, false);
+    }
 }
