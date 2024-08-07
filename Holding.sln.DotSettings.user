@@ -4,24 +4,8 @@
 	<s:String x:Key="/Default/CodeInspection/PencilsConfiguration/FiltersState/=NamingFilter/@EntryIndexedValue">On</s:String>
 	<s:String x:Key="/Default/CodeInspection/PencilsConfiguration/FiltersState/=CodeStyle/@EntryIndexedValue">On</s:String>
 	<s:Boolean x:Key="/Default/Environment/InlayHints/GeneralInlayHintsOptions/EnableInlayHints/@EntryValue">False</s:Boolean>
-	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=06d7a529_002D30f6_002D4596_002Db686_002D16c75fcafdc5/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="ShoudReturnInvalidWhenCommandIsInvalid" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
-  &lt;Or&gt;&#xD;
-    &lt;TestAncestor&gt;&#xD;
-      &lt;TestId&gt;MSTest::C0484267-BA69-41AB-946A-D9222DE4052E::net8.0::Holding.Tests.Domain.Company.CreateHoldingHandlerTest&lt;/TestId&gt;&#xD;
-      &lt;TestId&gt;MSTest::C0484267-BA69-41AB-946A-D9222DE4052E::net8.0::Holding.Tests.Domain.Company.ChangeHoldingCommandTests.ShoudReturnValidWhenUpdateIsValid&lt;/TestId&gt;&#xD;
-      &lt;TestId&gt;MSTest::C0484267-BA69-41AB-946A-D9222DE4052E::net8.0::Holding.Tests.Domain.Company.CreateHoldingCommandTests.ShoudReturnValidWhenCommandIsValid&lt;/TestId&gt;&#xD;
-      &lt;TestId&gt;MSTest::C0484267-BA69-41AB-946A-D9222DE4052E::net8.0::Holding.Tests.Domain.Company.ChangeHoldingCommandTests.ShoudReturnInvalidWhenCommandIsInvalid&lt;/TestId&gt;&#xD;
-      &lt;TestId&gt;MSTest::C0484267-BA69-41AB-946A-D9222DE4052E::net8.0::Holding.Tests.Domain.Company.ChangeHoldingCommandTests.ShoudReturnInvalidWhenGuidIsInvalid&lt;/TestId&gt;&#xD;
-      &lt;TestId&gt;MSTest::C0484267-BA69-41AB-946A-D9222DE4052E::net8.0::Holding.Tests.Domain.Company.ChangeHoldingCommandTests&lt;/TestId&gt;&#xD;
-      &lt;TestId&gt;MSTest::C0484267-BA69-41AB-946A-D9222DE4052E::net8.0::Holding.Tests.Domain.Company.ChangeHoldingHandlerTests.ShoudReturnValidWhenUpdateIsValid&lt;/TestId&gt;&#xD;
-      &lt;TestId&gt;MSTest::C0484267-BA69-41AB-946A-D9222DE4052E::net8.0::Holding.Tests.Domain.Company.FindHoldingByIdCommandTest.ShoudReturnInvalidWhenGuidIsInvalid&lt;/TestId&gt;&#xD;
-      &lt;TestId&gt;MSTest::C0484267-BA69-41AB-946A-D9222DE4052E::net8.0::Holding.Tests.Domain.Company.FindHoldingByIdCommandTest&lt;/TestId&gt;&#xD;
-    &lt;/TestAncestor&gt;&#xD;
-    &lt;ProjectFile&gt;C0484267-BA69-41AB-946A-D9222DE4052E/d:Domain/d:Company/f:CreateHoldingCommandTests.cs&lt;/ProjectFile&gt;&#xD;
-  &lt;/Or&gt;&#xD;
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=e97419b3_002D105b_002D4791_002D9af0_002D0c4b0fb3506e/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="All tests from Solution" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+  &lt;Solution /&gt;&#xD;
 &lt;/SessionState&gt;</s:String>
-	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=51b1425b_002Db940_002D414b_002D84fe_002D8b9c1414fdf9/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="ShoudReturnInvalidWhenGuidIsInvalid" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
-  &lt;TestAncestor&gt;&#xD;
-    &lt;TestId&gt;MSTest::C0484267-BA69-41AB-946A-D9222DE4052E::net8.0::Holding.Tests.Domain.Company.ChangeHoldingCommandTests.ShoudReturnInvalidWhenGuidIsInvalid&lt;/TestId&gt;&#xD;
-  &lt;/TestAncestor&gt;&#xD;
-&lt;/SessionState&gt;</s:String></wpf:ResourceDictionary>
+	
+	</wpf:ResourceDictionary>
