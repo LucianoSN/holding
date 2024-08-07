@@ -9,6 +9,11 @@ public static class CompanyQueries
         return x => x.Id == id;
     }
     
+    public static Expression<Func<Entities.Company, bool>> GetByHoldingId(Guid holdingId)
+    {
+        return x => x.HoldingId == holdingId;
+    }
+    
     public static Expression<Func<Entities.Company, bool>> GetByName(string name)
     {
         return x => x.Name == name;
