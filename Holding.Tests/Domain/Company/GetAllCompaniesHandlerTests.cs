@@ -44,8 +44,6 @@ public class GetAllCompaniesHandlerTests
 
         var result = await _createSut.Handle(command, CancellationToken.None);
         if (result.Success) await _repository.Transact.Commit();
-        
-        await _repository.GetCompanyById((result.Data as Holding.Company.Domain.Company.Entities.Company).Id);
     }
     
     [TestMethod]
