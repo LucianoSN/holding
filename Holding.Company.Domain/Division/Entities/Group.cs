@@ -2,25 +2,32 @@
 
 namespace Holding.Company.Domain.Division.Entities;
 
-public class Group  : Entity, IAggregateRoot
+public class Group : Entity, IAggregateRoot
 {
     protected Group() { }
-    
-    public Group(string name)
+
+    public Group(Guid companyId, string name)
     {
+        CompanyId = companyId;
         Name = name;
     }
 
+    public Guid CompanyId { get; private set; }
+    public Company.Entities.Company? Company { get; private set; }
+
     public string Name { get; private set; }
     public IList<SubGroup> SubGroups { get; private set; } = new List<SubGroup>();
-    
+
     public bool IsAccessible() => Active;
-    
+
     public void ChangeName(string name) => Name = name;
-    
-    public void AddSubGroup(SubGroup subGroup)
+
+    public bool AddSubGroup(SubGroup subGroup)
     {
-        if (SubGroups.Any(s => s.Name == subGroup.Name)) return;
+        if (SubGroups.Any(s => s.Name == subGroup.Name))
+            return false;
+
         SubGroups.Add(subGroup);
+        return true;
     }
 }

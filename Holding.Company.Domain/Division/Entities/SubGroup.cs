@@ -1,8 +1,6 @@
-﻿using Holding.Core.DomainObjects;
+﻿namespace Holding.Company.Domain.Division.Entities;
 
-namespace Holding.Company.Domain.Division.Entities;
-
-public class SubGroup  : Entity
+public class SubGroup
 {
     public SubGroup(string name)
     {
