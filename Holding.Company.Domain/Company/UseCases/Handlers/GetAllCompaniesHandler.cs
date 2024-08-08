@@ -10,7 +10,7 @@ public class GetAllCompaniesHandler(ICompanyRepository repository)
 {
     public async Task<GenericCommandResult> Handle(GetAllCompaniesCommand request, CancellationToken cancellationToken)
     {
-        var companies = await repository.GetAllHoldings();
+        var companies = await repository.GetAllCompanies();
         return new GenericCommandResult(companies, true, "Companies retrieved with success");
     }
 }
