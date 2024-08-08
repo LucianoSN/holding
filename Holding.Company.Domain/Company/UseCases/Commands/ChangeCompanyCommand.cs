@@ -10,7 +10,6 @@ namespace Holding.Company.Domain.Company.UseCases.Commands;
 public class ChangeCompanyCommand : Notifiable<Notification>, IRequest<GenericCommandResult>
 {
     public ChangeCompanyCommand(
-        string holdingId,
         string id,
         string name,
         string addressCountry,
@@ -22,7 +21,6 @@ public class ChangeCompanyCommand : Notifiable<Notification>, IRequest<GenericCo
         string contactPhone
     )
     {
-        HoldingId = Parser.ToGuid(holdingId);
         Id = Parser.ToGuid(id);
         Name = name;
 
@@ -37,10 +35,7 @@ public class ChangeCompanyCommand : Notifiable<Notification>, IRequest<GenericCo
 
         AddNotifications(new ChangeCompanyValidation(this));
         AddNotifications(new CustomNotification().IsGuid(id, "Id", "Id is invalid"));
-        AddNotifications(new CustomNotification().IsGuid(holdingId, "HoldingId", "HoldingId is invalid"));
     }
-    
-    public Guid HoldingId { get; private set; }
     
     public Guid Id { get; private set; }
     public string Name { get; private set; }
