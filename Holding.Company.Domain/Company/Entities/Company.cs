@@ -26,5 +26,5 @@ public class Company : Entity, IAggregateRoot
     public void ChangeName(string name) => Name = name;
     public void ChangeAddress(Address address) => Address = address;
     public void ChangeContact(Contact contact) => Contact = contact;
-    public void ChangeHolding(Guid holdingId) => HoldingId = holdingId;
+    public void ChangeHolding(Guid newHoldingId) => HoldingId = newHoldingId;
 }
