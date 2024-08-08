@@ -16,9 +16,7 @@ public class GetAllHoldingHandler(ICompanyRepository repository)
             companies.Data,
             companies.TotalCount,
             companies.CurrentPage,
-            companies.PageSize,
-            true,
-            "Holdings found successfully"
+            companies.PageSize
         );
     }
 }

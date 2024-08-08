@@ -7,9 +7,8 @@ public class PagedCommandResult : GenericCommandResult
         int totalCount, 
         int currentPage = 1, 
         int pageSize = 25,
-        bool success = false,
         string? message = null
-    ) : base(data, success, message)
+    ) : base(data, true, message)
     {
         Data = data;
         TotalCount = totalCount;

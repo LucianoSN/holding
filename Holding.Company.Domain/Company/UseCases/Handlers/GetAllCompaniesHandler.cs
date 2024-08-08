@@ -16,9 +16,7 @@ public class GetAllCompaniesHandler(ICompanyRepository repository)
             companies.Data,
             companies.TotalCount,
             companies.CurrentPage,
-            companies.PageSize,
-            true,
-            "Companies found successfully"
+            companies.PageSize
         );
     }
 }
