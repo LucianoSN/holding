@@ -4,9 +4,7 @@ namespace Holding.Company.Domain.Division.Entities;
 
 public class Group : Entity, IAggregateRoot
 {
-    protected Group()
-    {
-    }
+    protected Group() { }
 
     public Group(Guid companyId, string name)
     {
@@ -37,11 +35,12 @@ public class Group : Entity, IAggregateRoot
         return true;
     }
     
-    public void ChangeSubGroup(Guid subGroupId, string name)
+    public bool ChangeSubGroup(Guid subGroupId, string name)
     {
         var subGroup = SubGroups.FirstOrDefault(s => s.Id == subGroupId);
-        if (subGroup is null) return;
+        if (subGroup is null) return false;
 
         subGroup.ChangeName(name);
+        return true;
     }
 }
