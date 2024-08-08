@@ -4,7 +4,9 @@ namespace Holding.Company.Domain.Division.Entities;
 
 public class Group : Entity, IAggregateRoot
 {
-    protected Group() { }
+    protected Group()
+    {
+    }
 
     public Group(Guid companyId, string name)
     {
@@ -24,8 +26,12 @@ public class Group : Entity, IAggregateRoot
 
     public bool AddSubGroup(SubGroup subGroup)
     {
-        if (SubGroups.Any(s => s.Name == subGroup.Name))
-            return false;
+        if (
+            SubGroups.Any(s =>
+                s.Name == subGroup.Name
+                && s.Id == subGroup.Id
+            )
+        ) return false;
 
         SubGroups.Add(subGroup);
         return true;
