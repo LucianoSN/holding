@@ -14,4 +14,6 @@ public class SubGroup : Entity
     public Group? Group { get; private set; }
 
     public string Name { get; private set; } 
+    
+    public void ChangeName(string name) => Name = name;
 }

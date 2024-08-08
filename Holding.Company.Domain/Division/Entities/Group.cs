@@ -36,4 +36,12 @@ public class Group : Entity, IAggregateRoot
         SubGroups.Add(subGroup);
         return true;
     }
+    
+    public void ChangeSubGroup(Guid subGroupId, string name)
+    {
+        var subGroup = SubGroups.FirstOrDefault(s => s.Id == subGroupId);
+        if (subGroup is null) return;
+
+        subGroup.ChangeName(name);
+    }
 }
