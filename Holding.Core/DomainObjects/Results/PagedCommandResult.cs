@@ -6,8 +6,10 @@ public class PagedCommandResult : GenericCommandResult
         object? data,
         int totalCount, 
         int currentPage = 1, 
-        int pageSize = 25
-    ) : base(data)
+        int pageSize = 25,
+        bool success = false,
+        string? message = null
+    ) : base(data, success, message)
     {
         Data = data;
         TotalCount = totalCount;

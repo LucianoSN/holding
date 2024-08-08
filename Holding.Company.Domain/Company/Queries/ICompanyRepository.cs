@@ -11,7 +11,7 @@ public interface ICompanyRepository : IRepository<Entities.Company>
     Task<Entities.Company>? GetCompanyById(Guid id);
     Task<IEnumerable<Entities.Company>>? GetCompanyByName(string name);
     Task<IEnumerable<Entities.Company>> GetCompanyByHoldingId(Guid holdingId);
-    Task<IEnumerable<Entities.Company>> GetAllCompanies();
+    Task<PagedResponse<Entities.Company>> GetAllCompanies(int currentPage, int pageSize);
     Task<IEnumerable<Entities.Company>> GetAllCompaniesActivated();
     Task<IEnumerable<Entities.Company>> GetAllCompaniesDeactivated();
 

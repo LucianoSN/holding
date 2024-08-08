@@ -48,12 +48,26 @@ public class CompanyRepository(DataContext context) : ICompanyRepository
             .ToListAsync();
     }
 
-    public async Task<IEnumerable<Company.Domain.Company.Entities.Company>> GetAllCompanies()
+    public async Task<PagedResponse<Company.Domain.Company.Entities.Company>> GetAllCompanies(int currentPage, int pageSize)
     {
-        return await context.Companies
+        var query = context.Companies
             .AsNoTracking()
-            .OrderBy(x => x.Name)
+            .OrderBy(x => x.Name);
+
+        var companies = await query
+            .Skip((currentPage - 1) * pageSize)
+            .Take(pageSize)
             .ToListAsync();
+
+        var count = await query.CountAsync();
+
+        return new PagedResponse<Company.Domain.Company.Entities.Company>
+        {
+            Data = companies,
+            TotalCount = count,
+            CurrentPage = currentPage,
+            PageSize = pageSize
+        };
     }
 
     public async Task<IEnumerable<Company.Domain.Company.Entities.Company>> GetAllCompaniesActivated()

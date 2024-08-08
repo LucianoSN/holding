@@ -6,11 +6,19 @@ using MediatR;
 namespace Holding.Company.Domain.Company.UseCases.Handlers;
 
 public class GetAllCompaniesHandler(ICompanyRepository repository)
-    : IRequestHandler<GetAllCompaniesCommand, GenericCommandResult>
+    : IRequestHandler<GetAllCompaniesCommand, PagedCommandResult>
 {
-    public async Task<GenericCommandResult> Handle(GetAllCompaniesCommand request, CancellationToken cancellationToken)
+    public async Task<PagedCommandResult> Handle(GetAllCompaniesCommand command, CancellationToken cancellationToken)
     {
-        var companies = await repository.GetAllCompanies();
-        return new GenericCommandResult(companies, true, "Companies retrieved with success");
+        var companies = await repository.GetAllCompanies(command.CurrentPage, command.PageSize);
+
+        return new PagedCommandResult(
+            companies.Data,
+            companies.TotalCount,
+            companies.CurrentPage,
+            companies.PageSize,
+            true,
+            "Companies found successfully"
+        );
     }
 }

@@ -56,12 +56,11 @@ public class GetAllCompaniesHandlerTests
     
         // Act
         var result = await _getAllSut.Handle(command, CancellationToken.None);
-        var total = (result.Data as List<Holding.Company.Domain.Company.Entities.Company>).Count();
     
         // Assert
         Assert.AreEqual(command.IsValid, true);
         Assert.AreEqual(result.Success, true);
-        Assert.AreEqual(total, 0);
+        Assert.AreEqual(result.TotalCount, 0);
     }
 
     [TestMethod]
