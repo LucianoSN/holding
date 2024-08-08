@@ -4,6 +4,14 @@ using MediatR;
 
 namespace Holding.Company.Domain.Company.UseCases.Commands;
 
-public class GetAllHoldingCommand : Notifiable<Notification>, IRequest<GenericCommandResult>
+public class GetAllHoldingCommand : Notifiable<Notification>, IRequest<PagedCommandResult>
 {
+    public GetAllHoldingCommand(int currentPage = 1, int pageSize = 25)
+    {
+        CurrentPage = currentPage;
+        PageSize = pageSize;
+    }
+
+    public int CurrentPage { get; private set; }    
+    public int PageSize { get; private set; }    
 }

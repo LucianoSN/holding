@@ -25,7 +25,6 @@ public class GetAllHoldingHandlerTests
         var command = new CreateHoldingCommand(name, description);
         var result = await _createSut.Handle(command, CancellationToken.None);
         if (result.Success) await _repository.Transact.Commit();
-        await _repository.GetHoldingById((result.Data as Holding.Company.Domain.Company.Entities.Holding).Id);
     }
     
     [TestMethod]
@@ -36,12 +35,11 @@ public class GetAllHoldingHandlerTests
     
         // Act
         var result = await _getAllSut.Handle(command, CancellationToken.None);
-        var total = (result.Data as List<Holding.Company.Domain.Company.Entities.Holding>).Count();
     
         // Assert
         Assert.AreEqual(command.IsValid, true);
         Assert.AreEqual(result.Success, true);
-        Assert.AreEqual(total, 0);
+        Assert.AreEqual(result.TotalCount, 0);
     }
 
     [TestMethod]
@@ -53,12 +51,11 @@ public class GetAllHoldingHandlerTests
     
         // Act
         var result = await _getAllSut.Handle(command, CancellationToken.None);
-        var total = (result.Data as List<Holding.Company.Domain.Company.Entities.Holding>).Count();
     
         // Assert
         Assert.AreEqual(command.IsValid, true);
         Assert.AreEqual(result.Success, true);
-        Assert.AreNotEqual(total, 0);
+        Assert.AreNotEqual(result.TotalCount, 0);
     }
     
 }

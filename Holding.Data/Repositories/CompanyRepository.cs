@@ -115,12 +115,26 @@ public class CompanyRepository(DataContext context) : ICompanyRepository
             .ToListAsync();
     }
 
-    public async Task<IEnumerable<Company.Domain.Company.Entities.Holding>> GetAllHoldings()
+    public async Task<PagedResponse<Company.Domain.Company.Entities.Holding>> GetAllHoldings(int currentPage, int pageSize)
     {
-        return await context.Holdings
+        var query = context.Holdings
             .AsNoTracking()
-            .OrderBy(x => x.Name)
+            .OrderBy(x => x.Name);
+
+        var holdings = await query
+            .Skip((currentPage - 1) * pageSize)
+            .Take(pageSize)
             .ToListAsync();
+
+        var count = await query.CountAsync();
+
+        return new PagedResponse<Company.Domain.Company.Entities.Holding>
+        {
+            Data = holdings,
+            TotalCount = count,
+            CurrentPage = currentPage,
+            PageSize = pageSize
+        };
     }
 
     public async Task<IEnumerable<Company.Domain.Company.Entities.Holding>> GetAllHoldingActivated()
