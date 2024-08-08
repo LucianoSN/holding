@@ -18,7 +18,7 @@ public class GetAllCompaniesHandlerTests
         _getAllSut = new GetAllCompaniesHandler(_repository);
     }
     
-    private async Task<Holding.Company.Domain.Company.Entities.Company> CreateCompanySut(
+    private async Task CreateCompanySut(
         string holdingId,
         string name = "CompanyName",
         string addressCountry = "CountryName",
@@ -45,7 +45,7 @@ public class GetAllCompaniesHandlerTests
         var result = await _createSut.Handle(command, CancellationToken.None);
         if (result.Success) await _repository.Transact.Commit();
         
-        return await _repository.GetCompanyById((result.Data as Holding.Company.Domain.Company.Entities.Company).Id);
+        await _repository.GetCompanyById((result.Data as Holding.Company.Domain.Company.Entities.Company).Id);
     }
     
     [TestMethod]
