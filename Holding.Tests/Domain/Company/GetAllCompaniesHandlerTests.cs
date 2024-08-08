@@ -65,7 +65,7 @@ public class GetAllCompaniesHandlerTests
     }
 
     [TestMethod]
-    public async Task ShoudReturnValidWhenGetAllHoldingHasValues()
+    public async Task ShoudReturnValidWhenGetAllCompaniesHasValues()
     {
         // Arrange
         await CreateCompanySut(Guid.NewGuid().ToString());
