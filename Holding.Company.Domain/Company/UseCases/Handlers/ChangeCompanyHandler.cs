@@ -6,7 +6,7 @@ using MediatR;
 
 namespace Holding.Company.Domain.Company.UseCases.Handlers;
 
-public class ChangeCompanyHandle(ICompanyRepository repository)
+public class ChangeCompanyHandler(ICompanyRepository repository)
     : IRequestHandler<ChangeCompanyCommand, GenericCommandResult>
 {
     public async Task<GenericCommandResult> Handle(ChangeCompanyCommand command,
