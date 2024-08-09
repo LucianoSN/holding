@@ -37,7 +37,7 @@ public class Group : Entity, IAggregateRoot
         return true;
     }
 
-    public bool ChangeSubGroup(Guid subGroupId, string name)
+    public bool ChangeSubGroupName(Guid subGroupId, string name)
     {
         var subGroup = SubGroups.FirstOrDefault(s => s.Id == subGroupId);
         if (subGroup is null) return false;
