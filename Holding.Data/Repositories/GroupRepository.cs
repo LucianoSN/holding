@@ -31,6 +31,11 @@ public class GroupRepository(DataContext context) : IGroupRepository
         throw new NotImplementedException();
     }
 
+    public Task<Group>? GetGroupByIdWithSubGroups(Guid id)
+    {
+        throw new NotImplementedException();
+    }
+
     public Task<IEnumerable<Group>>? GetGroupByName(string name)
     {
         throw new NotImplementedException();

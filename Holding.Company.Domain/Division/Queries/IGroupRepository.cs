@@ -9,6 +9,7 @@ public interface IGroupRepository : IRepository<Entities.Group>
     Task Create(Entities.Group group);
     Task Update(Entities.Group group);
     Task<Entities.Group>? GetGroupById(Guid id);
+    Task<Entities.Group>? GetGroupByIdWithSubGroups(Guid id);
     Task<IEnumerable<Entities.Group>>? GetGroupByName(string name);
     Task<PagedResponse<Entities.Group>> GetAllGroups(int currentPage, int pageSize);
 
