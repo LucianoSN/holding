@@ -41,6 +41,9 @@ public class Group : Entity, IAggregateRoot
     {
         var subGroup = SubGroups.FirstOrDefault(s => s.Id == subGroupId);
         if (subGroup is null) return false;
+        
+        foreach (var sub in SubGroups)
+            if (sub.Name == name) return false; 
 
         subGroup.ChangeName(name);
         return true;
