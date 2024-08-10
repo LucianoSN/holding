@@ -20,4 +20,6 @@ public class CreateGroupCommand : Notifiable<Notification>, IRequest<GenericComm
 
     public Guid CompanyId { get; private set; }
     public string Name { get; private set; }
+    
+    public Entities.Group ToEntity() => new(CompanyId, Name);
 }

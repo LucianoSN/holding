@@ -11,10 +11,6 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Division\UseCases\Handlers\" />
-    </ItemGroup>
-
-    <ItemGroup>
       <PackageReference Include="Flunt" Version="2.0.5" />
       <PackageReference Include="MediatR" Version="12.4.0" />
     </ItemGroup>
