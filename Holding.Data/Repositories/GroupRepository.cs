@@ -39,9 +39,12 @@ public class GroupRepository(DataContext context) : IGroupRepository
            .FirstOrDefaultAsync(GroupQueries.GetById(id));
     }
 
-    public Task<IEnumerable<Group>>? GetGroupByName(string name)
+    public async Task<IEnumerable<Group>>? GetGroupByName(string name)
     {
-        throw new NotImplementedException();
+        return await context.Groups
+            .Where(GroupQueries.GetByName(name))
+            .OrderBy(x => x.Name)
+            .ToListAsync();
     }
 
     public async Task<PagedResponse<Group>> GetAllGroups(int currentPage, int pageSize)
