@@ -1,4 +1,5 @@
 ﻿using Holding.Company.Domain.Company.Queries;
+using Holding.Company.Domain.Division.Queries;
 using Holding.Data.Contexts;
 using Holding.Data.Repositories;
 using Microsoft.EntityFrameworkCore;
@@ -16,7 +17,8 @@ public static class Helper
             options.UseInMemoryDatabase(Guid.NewGuid().ToString()));
 
         services
-            .AddTransient<ICompanyRepository, CompanyRepository>();
+            .AddTransient<ICompanyRepository, CompanyRepository>()
+            .AddTransient<IGroupRepository, GroupRepository>();
 
         return services.BuildServiceProvider();
     }
