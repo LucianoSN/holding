@@ -29,7 +29,7 @@ public class Group : Entity, IAggregateRoot
         if (
             SubGroups.Any(s =>
                 s.Name == subGroup.Name
-                && s.Id == subGroup.Id
+                && Id == subGroup.GroupId
             )
         ) return false;
 
