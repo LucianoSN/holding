@@ -2,6 +2,7 @@
 using Holding.Company.Domain.Division.Queries;
 using Holding.Core.Data;
 using Holding.Data.Contexts;
+using Microsoft.EntityFrameworkCore;
 
 namespace Holding.Data.Repositories;
 
@@ -21,19 +22,21 @@ public class GroupRepository(DataContext context) : IGroupRepository
         await context.Groups.AddAsync(group);
     }
 
-    public Task Update(Group group)
+    public async Task Update(Group group)
     {
-        throw new NotImplementedException();
+        await Task.Run(() => context.Groups.Update(group));
     }
 
-    public Task<Group>? GetGroupById(Guid id)
+    public async Task<Group>? GetGroupById(Guid id)
     {
-        throw new NotImplementedException();
+       return await context.Groups.FirstOrDefaultAsync(GroupQueries.GetById(id));
     }
 
-    public Task<Group>? GetGroupByIdWithSubGroups(Guid id)
+    public async Task<Group>? GetGroupByIdWithSubGroups(Guid id)
     {
-        throw new NotImplementedException();
+       return await context.Groups
+           .Include(x => x.SubGroups)
+           .FirstOrDefaultAsync(GroupQueries.GetById(id));
     }
 
     public Task<IEnumerable<Group>>? GetGroupByName(string name)
@@ -41,29 +44,65 @@ public class GroupRepository(DataContext context) : IGroupRepository
         throw new NotImplementedException();
     }
 
-    public Task<PagedResponse<Group>> GetAllGroups(int currentPage, int pageSize)
+    public async Task<PagedResponse<Group>> GetAllGroups(int currentPage, int pageSize)
     {
-        throw new NotImplementedException();
+        var query = context.Groups
+            .AsNoTracking()
+            .OrderBy(x => x.Name);
+
+        var groups = await query
+            .Skip((currentPage - 1) * pageSize)
+            .Take(pageSize)
+            .ToListAsync();
+
+        var count = await query.CountAsync();
+
+        return new PagedResponse<Group>
+        {
+            Data = groups,
+            TotalCount = count,
+            CurrentPage = currentPage,
+            PageSize = pageSize
+        };
     }
-    
 
     #endregion
 
     #region SubGroup
 
-    public Task<SubGroup>? GetSubGroupById(Guid id)
+    public async Task<SubGroup>? GetSubGroupById(Guid id)
     {
-        throw new NotImplementedException();
+        return await context.SubGroups.FirstOrDefaultAsync(SubGroupQueries.GetById(id));
     }
 
-    public Task<IEnumerable<SubGroup>>? GetSubGroupByName(string name)
+    public async Task<IEnumerable<SubGroup>>? GetSubGroupByName(string name)
     {
-        throw new NotImplementedException();
+       return await context.SubGroups
+           .Where(SubGroupQueries.GetByName(name))
+           .OrderBy(x => x.Name)
+           .ToListAsync();
     }
 
-    public Task<PagedResponse<SubGroup>> GetAllSubGroups(int currentPage, int pageSize)
+    public async Task<PagedResponse<SubGroup>> GetAllSubGroups(int currentPage, int pageSize)
     {
-        throw new NotImplementedException();
+        var query = context.SubGroups
+            .AsNoTracking()
+            .OrderBy(x => x.Name);
+
+        var subGroups = await query
+            .Skip((currentPage - 1) * pageSize)
+            .Take(pageSize)
+            .ToListAsync();
+
+        var count = await query.CountAsync();
+
+        return new PagedResponse<SubGroup>
+        {
+            Data = subGroups,
+            TotalCount = count,
+            CurrentPage = currentPage,
+            PageSize = pageSize
+        };
     }
 
     #endregion
