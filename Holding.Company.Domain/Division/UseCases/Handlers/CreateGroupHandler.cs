@@ -13,14 +13,18 @@ public class CreateGroupHandler(IGroupRepository repository)
     {
         // Fast Fail Validation
         if (!command.IsValid)
-            return new GenericCommandResult(command.Notifications, false, "Ops, this group is invalid");
-        
+            return new GenericCommandResult(
+                command.Notifications,
+                false,
+                "Ops, this group is invalid"
+            );
+
         // Generate the Group
         var group = command.ToEntity();
-        
+
         // Save in the database
         await repository.Create(group);
-        
+
         return new GenericCommandResult(group, true, "Group created");
     }
 }
