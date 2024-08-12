@@ -13,19 +13,19 @@ public class CreateSubGroupHandler(IGroupRepository repository)
     {
         // Fast Fail Validation
         if (!command.IsValid)
-            return new GenericCommandResult(command.Notifications, false, "Ops, this subgroup is invalid");
+            return new GenericCommandResult(command.Notifications, false, "Ops, this SubGroup is invalid");
 
         // Get the group        
-        var group = await repository.GetGroupById(command.GroupId);
+        var group = await repository.GetGroupByIdWithSubGroups(command.GroupId);
 
         // Check if the group exists
         if (group == null)
             return new GenericCommandResult(null, false, "Group not found");
 
-        // Create the sub group
+        // Create the subgroup
         var subGroup = command.ToEntity();
 
-        // Add the sub group to the group
+        // Add the subgroup to the group
         var result = group.AddSubGroup(subGroup);
 
         // Save in the database
@@ -35,7 +35,7 @@ public class CreateSubGroupHandler(IGroupRepository repository)
         return new GenericCommandResult(
             subGroup,
             result,
-            result ? "Subgroup created with success" : "Subgroup already exists"
+            result ? "SubGroup created with success" : "SubGroup already exists"
         );
     }
 }
