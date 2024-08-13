@@ -26,16 +26,19 @@ public class CreateSubGroupHandler(IGroupRepository repository)
         var subGroup = command.ToEntity();
 
         // Add the subgroup to the group
-        var result = group.AddSubGroup(subGroup);
+        var addSubGroup = group.AddSubGroup(subGroup);
 
-        // Save in the database
-        if (result)
-            await repository.Update(group);
+        // Check if the subgroup already exists
+        if (!addSubGroup)
+            return new GenericCommandResult(command.Notifications, false, "SubGroup already exists");
+            
+        await repository.Update(group);
+        await repository.Transact.Commit();
 
         return new GenericCommandResult(
             subGroup,
-            result,
-            result ? "SubGroup created with success" : "SubGroup already exists"
+            addSubGroup,
+            "SubGroup created with success"
         );
     }
 }
