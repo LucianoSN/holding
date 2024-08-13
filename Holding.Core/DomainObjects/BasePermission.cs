@@ -10,8 +10,6 @@ public abstract class BasePermission
     private bool Editor { get; set; }
     private bool Participant { get; set; }
     private bool Integration { get; set; }
-
-    protected abstract void SetPermission();
     
     protected void ChangePartner(bool value) => Partner = value;
     protected void ChangeSuperAdministrator(bool value) => SuperAdministrator = value;
@@ -19,6 +17,8 @@ public abstract class BasePermission
     protected void ChangeEditor(bool value) => Editor = value;
     protected void ChangeParticipant(bool value) => Participant = value;
     protected void ChangeIntegration(bool value) => Integration = value;
+
+    protected abstract void SetPermission();
 
     public bool HasPermission(Role role)
     {
