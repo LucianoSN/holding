@@ -24,7 +24,6 @@ public class ChangeHoldingHandlerTests
     {
         var command = new CreateHoldingCommand(name, description);
         var result = await _createSut.Handle(command, CancellationToken.None);
-        if (result.Success) await _repository.Transact.Commit();
         return await _repository.GetHoldingById((result.Data as Holding.Company.Domain.Company.Entities.Holding).Id);
     }
 
@@ -37,7 +36,6 @@ public class ChangeHoldingHandlerTests
 
         // Act
         var result = await _changeSut.Handle(command, CancellationToken.None);
-        if (result.Success) await _repository.Transact.Commit();
         var changedHolding = await _repository.GetHoldingById(holding.Id);
 
         // Assert

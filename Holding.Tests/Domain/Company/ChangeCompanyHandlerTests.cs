@@ -66,7 +66,6 @@ public class ChangeCompanyHandlerTests
 
         // Act
         var result = await _changeSut.Handle(command, CancellationToken.None);
-        if (result.Success) await _repository.Transact.Commit();
         var changed = await _repository.GetCompanyById(company.Id);
 
         // Assert

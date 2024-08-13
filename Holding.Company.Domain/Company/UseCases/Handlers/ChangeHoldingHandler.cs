@@ -28,6 +28,7 @@ public class ChangeHoldingHandler(ICompanyRepository repository)
 
         // Save in the database
         await repository.Update(holding);
+        await repository.Transact.Commit();
 
         return new GenericCommandResult(holding, true, "Holding updated with success");
     }

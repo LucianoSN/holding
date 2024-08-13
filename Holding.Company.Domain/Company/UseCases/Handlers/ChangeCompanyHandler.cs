@@ -43,6 +43,7 @@ public class ChangeCompanyHandler(ICompanyRepository repository)
         
         // Save in the database
         await repository.Update(company);
+        await repository.Transact.Commit();
         
         return new GenericCommandResult(company, true, "Company updated with success");
     }

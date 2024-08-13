@@ -24,7 +24,6 @@ public class FindHoldingHandlerTests
     {
         var command = new CreateHoldingCommand(name, description);
         var result = await _createSut.Handle(command, CancellationToken.None);
-        if (result.Success) await _repository.Transact.Commit();
         return await _repository.GetHoldingById((result.Data as Holding.Company.Domain.Company.Entities.Holding).Id);
     }
 

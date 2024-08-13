@@ -23,8 +23,7 @@ public class GetAllHoldingHandlerTests
         string description = "")
     {
         var command = new CreateHoldingCommand(name, description);
-        var result = await _createSut.Handle(command, CancellationToken.None);
-        if (result.Success) await _repository.Transact.Commit();
+        await _createSut.Handle(command, CancellationToken.None);
     }
     
     [TestMethod]
