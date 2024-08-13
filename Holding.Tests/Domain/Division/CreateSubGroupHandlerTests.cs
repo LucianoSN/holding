@@ -60,7 +60,7 @@ public class CreateSubGroupHandlerTests
         
         // Act
         var result = await _addSubGroupSut.Handle(command, CancellationToken.None);
-        var getGroup = await _repository.GetGroupByIdWithSubGroups(group.Id);
+        var getGroup = await _repository.GetGroupByIdWithSubGroupsTracking(group.Id);
         
         // Assert
         Assert.AreEqual(command.IsValid, true);

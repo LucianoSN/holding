@@ -32,7 +32,7 @@ public class GroupRepository(DataContext context) : IGroupRepository
        return await context.Groups.FirstOrDefaultAsync(GroupQueries.GetById(id));
     }
 
-    public async Task<Group>? GetGroupByIdWithSubGroups(Guid id)
+    public async Task<Group>? GetGroupByIdWithSubGroupsTracking(Guid id)
     {
        return await context.Groups
            .Include(x => x.SubGroups)

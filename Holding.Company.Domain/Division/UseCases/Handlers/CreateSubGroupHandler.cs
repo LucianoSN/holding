@@ -16,7 +16,7 @@ public class CreateSubGroupHandler(IGroupRepository repository)
             return new GenericCommandResult(command.Notifications, false, "Ops, this SubGroup is invalid");
 
         // Get the group        
-        var group = await repository.GetGroupByIdWithSubGroups(command.GroupId);
+        var group = await repository.GetGroupByIdWithSubGroupsTracking(command.GroupId);
 
         // Check if the group exists
         if (group == null)
