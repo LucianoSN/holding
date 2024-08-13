@@ -1,4 +1,5 @@
 ﻿using System.Text.RegularExpressions;
+using Holding.Core.Enumerators;
 
 namespace Holding.Core.Helpers;
 
@@ -18,5 +19,21 @@ public static class Parser
     {
         if (!IsGuid(stringValue)) return Guid.Empty;
         return Guid.Parse(stringValue);
+    }
+    
+    public static Role ToRole(this string stringValue)
+    {
+        if (string.IsNullOrEmpty(stringValue)) return Role.Participant;
+        
+        return stringValue.ToLower() switch
+        {
+            "partner" => Role.Partner,
+            "superadministrator" => Role.SuperAdministrator,
+            "administrator" => Role.Administrator,
+            "editor" => Role.Editor,
+            "participant" => Role.Participant,
+            "integration" => Role.Integration,
+            _ => Role.Participant
+        };
     }
 }

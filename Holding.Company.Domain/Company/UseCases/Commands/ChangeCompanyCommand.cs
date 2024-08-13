@@ -1,6 +1,7 @@
 ﻿using Flunt.Notifications;
 using Holding.Company.Domain.Company.UseCases.Commands.Validations;
 using Holding.Core.DomainObjects.Results;
+using Holding.Core.Enumerators;
 using Holding.Core.Helpers;
 using Holding.Core.Validations.Notifications;
 using MediatR;
@@ -18,9 +19,12 @@ public class ChangeCompanyCommand : Notifiable<Notification>, IRequest<GenericCo
         string addressStreet,
         string contactFullName,
         string contactEmail,
-        string contactPhone
+        string contactPhone,
+        string role = ""
     )
     {
+        Role = Parser.ToRole(role);
+        
         Id = Parser.ToGuid(id);
         Name = name;
 
@@ -36,6 +40,8 @@ public class ChangeCompanyCommand : Notifiable<Notification>, IRequest<GenericCo
         AddNotifications(new ChangeCompanyValidation(this));
         AddNotifications(new CustomNotification().IsGuid(id, "Id", "Id is invalid"));
     }
+    
+    public Role Role { get; private set; }
     
     public Guid Id { get; private set; }
     public string Name { get; private set; }

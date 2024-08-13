@@ -61,7 +61,8 @@ public class ChangeCompanyHandlerTests
             "NewAddressStreetName",
             "NewContatctFullName",
             "changed@email.com",
-            "987654321"
+            "987654321",
+            "SuperAdministrator"
         );
 
         // Act
