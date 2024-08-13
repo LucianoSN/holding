@@ -25,7 +25,6 @@ public class CreateSubGroupHandlerTests
     {
         var command = new CreateGroupCommand(companyId, name);
         var result = await _createSut.Handle(command, CancellationToken.None);
-        if (result.Success) await _repository.Transact.Commit();
         
         var group = result.Data as Group;
         var subGroupCommand = new CreateSubGroupCommand(group.Id.ToString(), "SubGroupCreation01");

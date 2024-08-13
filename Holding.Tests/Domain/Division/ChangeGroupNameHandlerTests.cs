@@ -25,7 +25,6 @@ public class ChangeGroupNameHandlerTests
     {
         var command = new CreateGroupCommand(companyId, name);
         var result = await _createSut.Handle(command, CancellationToken.None);
-        if (result.Success) await _repository.Transact.Commit();
         return result.Data as Group;
     }
 
@@ -39,7 +38,6 @@ public class ChangeGroupNameHandlerTests
        
        // Act
        var result = await _changeSut.Handle(command, CancellationToken.None);
-       if (result.Success) await _repository.Transact.Commit();
        var changedGroup = await _repository.GetGroupById(group.Id);
        
         // Assert

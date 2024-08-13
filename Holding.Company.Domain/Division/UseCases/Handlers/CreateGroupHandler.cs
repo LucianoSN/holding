@@ -24,6 +24,7 @@ public class CreateGroupHandler(IGroupRepository repository)
 
         // Save in the database
         await repository.Create(group);
+        await repository.Transact.Commit();
 
         return new GenericCommandResult(group, true, "Group created");
     }
