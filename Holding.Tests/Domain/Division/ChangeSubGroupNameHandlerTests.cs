@@ -30,8 +30,11 @@ public class ChangeSubGroupNameHandlerTests
         if (result.Success) await _repository.Transact.Commit();
 
         var group = result.Data as Group;
-        var subGroupCommand = new CreateSubGroupCommand(group.Id.ToString(), "SubGroupCreation01");
-        await _addSubGroupSut.Handle(subGroupCommand, CancellationToken.None);
+        var subGroupCommand1 = new CreateSubGroupCommand(group.Id.ToString(), "SubGroupCreation01");
+        await _addSubGroupSut.Handle(subGroupCommand1, CancellationToken.None);
+
+        var subGroupCommand2 = new CreateSubGroupCommand(group.Id.ToString(), "SubGroupCreation02");
+        await _addSubGroupSut.Handle(subGroupCommand2, CancellationToken.None);
 
         return group;
     }
@@ -44,7 +47,7 @@ public class ChangeSubGroupNameHandlerTests
         var command = new ChangeSubGroupNameCommand(
             group.SubGroups.First().Id.ToString(),
             group.Id.ToString(),
-            "SubGroupCreation01"
+            "SubGroupCreation02"
         );
 
         // Act
@@ -53,7 +56,30 @@ public class ChangeSubGroupNameHandlerTests
         // Assert
         Assert.AreEqual(command.IsValid, true);
         Assert.AreEqual(result.Success, false);
-        Assert.AreEqual(group.SubGroups.Count, 1);
+        Assert.AreEqual(group.SubGroups.Count, 2);
         Assert.AreEqual(result.Message, "SubGroup already exists");
+    }
+
+    [TestMethod]
+    public async Task ShouldReturnValidWhenSubGroupIsValid()
+    {
+        // Arrange
+        var name = "ChangedSubGroupToAnotherName";
+        var group = await CreateGroupSut(_companyId.ToString(), "GroupCreation");
+        var command = new ChangeSubGroupNameCommand(
+            group.SubGroups.First().Id.ToString(),
+            group.Id.ToString(),
+            name
+        );
+
+        // Act
+        var result = await _changeSubGroupSut.Handle(command, CancellationToken.None);
+        var getGroup = await _repository.GetGroupByIdWithSubGroupsTracking(group.Id);
+
+        // Assert
+        Assert.AreEqual(command.IsValid, true);
+        Assert.AreEqual(result.Success, true);
+        Assert.AreEqual(getGroup.SubGroups.Count, 2);
+        Assert.AreEqual(getGroup.SubGroups.First().Name, name);
     }
 }
