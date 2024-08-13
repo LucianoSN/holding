@@ -50,4 +50,21 @@ public class CreateSubGroupHandlerTests
         Assert.AreEqual(group.SubGroups.Count, 1);
         Assert.AreEqual(result.Message, "SubGroup already exists");
     }
+
+    [TestMethod]
+    public async Task ShouldReturnValidWhenSubGroupIsValid()
+    {
+        // Arrange
+        var group = await CreateGroupSut(_companyId.ToString(), "GroupCreation");
+        var command = new CreateSubGroupCommand(group.Id.ToString(), "SubGroupCreation02");
+        
+        // Act
+        var result = await _addSubGroupSut.Handle(command, CancellationToken.None);
+        var getGroup = await _repository.GetGroupByIdWithSubGroups(group.Id);
+        
+        // Assert
+        Assert.AreEqual(command.IsValid, true);
+        Assert.AreEqual(result.Success, true);
+        Assert.AreEqual(getGroup.SubGroups.Count, 2);
+    }
 }
