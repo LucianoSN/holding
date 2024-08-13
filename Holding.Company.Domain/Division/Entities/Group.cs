@@ -26,6 +26,9 @@ public class Group : Entity, IAggregateRoot
 
     public bool AddSubGroup(SubGroup subGroup)
     {
+        if (subGroup.GroupId != Id)
+            return false;
+        
         if (
             SubGroups.Any(s =>
                 s.Name == subGroup.Name
