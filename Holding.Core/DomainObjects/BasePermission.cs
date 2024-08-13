@@ -4,12 +4,12 @@ namespace Holding.Core.DomainObjects;
 
 public abstract class BasePermission
 {
-    public bool Partner { get; private set; }
-    public bool SuperAdministrator { get; private set; }
-    public bool Administrator { get; private set; }
-    public bool Editor { get; private set; }
-    public bool Participant { get; private set; }
-    public bool Integration { get; private set; }
+    private bool Partner { get; set; }
+    private bool SuperAdministrator { get; set; }
+    private bool Administrator { get; set; }
+    private bool Editor { get; set; }
+    private bool Participant { get; set; }
+    private bool Integration { get; set; }
 
     protected abstract void SetPermission();
     
