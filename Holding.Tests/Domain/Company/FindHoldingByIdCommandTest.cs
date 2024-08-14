@@ -5,7 +5,7 @@ namespace Holding.Tests.Domain.Company;
 [TestClass]
 public class FindHoldingByIdCommandTest
 {
-   private static FindHoldingByIdCommand Sut(string id) => new(id);
+   private static FindHoldingByIdCommand Sut(string id, string role = "Master") => new(id, role);
    
    [TestMethod]
    public void ShoudReturnInvalidWhenGuidIsInvalid()

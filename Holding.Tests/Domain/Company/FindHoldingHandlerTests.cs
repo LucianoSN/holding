@@ -34,7 +34,7 @@ public class FindHoldingHandlerTests
     {
         // Arrange
         var holding = await CreateHoldingSut("Holding", "Holding Description");
-        var command = new FindHoldingByIdCommand(holding.Id.ToString());
+        var command = new FindHoldingByIdCommand(holding.Id.ToString(), "Master");
 
         // Act
         var result = await _findSut.Handle(command, CancellationToken.None);
@@ -48,7 +48,7 @@ public class FindHoldingHandlerTests
     public async Task ShoudReturnInvalidWhenFindHoldingByIdNotFound()
     {
         // Arrange
-        var command = new FindHoldingByIdCommand(Guid.NewGuid().ToString());
+        var command = new FindHoldingByIdCommand(Guid.NewGuid().ToString(), "Master");
 
         // Act
         var result = await _findSut.Handle(command, CancellationToken.None);
