@@ -34,7 +34,7 @@ public class ChangeGroupNameHandlerTests
        // Arrange
        var name = "GroupChangeName";
        var group = await CreateGroupSut(_companyId.ToString(), "GroupCreation");
-       var command = new ChangeGroupNameCommand(group.Id.ToString(), name);
+       var command = new ChangeGroupNameCommand(group.Id.ToString(), name, "Administrator");
        
        // Act
        var result = await _changeSut.Handle(command, CancellationToken.None);
