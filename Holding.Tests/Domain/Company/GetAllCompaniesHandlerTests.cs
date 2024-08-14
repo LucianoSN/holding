@@ -52,7 +52,7 @@ public class GetAllCompaniesHandlerTests
     public async Task ShoudReturnInvalidWhenGetAllCompaniesIsEmpty()
     {
         // Arrange
-        var command = new GetAllCompaniesCommand();
+        var command = new GetAllCompaniesCommand(role: "Administrator");
     
         // Act
         var result = await _getAllSut.Handle(command, CancellationToken.None);
@@ -68,7 +68,7 @@ public class GetAllCompaniesHandlerTests
     {
         // Arrange
         await CreateCompanySut(Guid.NewGuid().ToString());
-        var command = new GetAllCompaniesCommand();
+        var command = new GetAllCompaniesCommand(role: "Administrator");
     
         // Act
         var result = await _getAllSut.Handle(command, CancellationToken.None);
