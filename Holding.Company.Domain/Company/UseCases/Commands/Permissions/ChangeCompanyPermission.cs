@@ -1,10 +1,11 @@
 ﻿using Holding.Core.DomainObjects;
+using Holding.Core.Enumerators;
 
-namespace Holding.Company.Domain.Company.UseCases.Handlers.Permissions;
+namespace Holding.Company.Domain.Company.UseCases.Commands.Permissions;
 
 public class ChangeCompanyPermission : BasePermission
 {
-    public ChangeCompanyPermission()
+    public ChangeCompanyPermission(Role role) : base(role)
     {
         SetPermission();
     } 

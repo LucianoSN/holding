@@ -1,6 +1,5 @@
 ﻿using Holding.Company.Domain.Company.Queries;
 using Holding.Company.Domain.Company.UseCases.Commands;
-using Holding.Company.Domain.Company.UseCases.Handlers.Permissions;
 using Holding.Core.DomainObjects.Results;
 using Holding.Core.ValueObjects;
 using MediatR;
@@ -14,7 +13,7 @@ public class ChangeCompanyHandler(ICompanyRepository repository)
         CancellationToken cancellationToken)
     {
         // Check permissions
-        if (!new ChangeCompanyPermission().HasPermission(command.Role))
+        if (!command.Permission.IsValid())
             return new GenericCommandResult(null, false, "You do not have permission to perform this action");
         
         // Fast Fail Validation
