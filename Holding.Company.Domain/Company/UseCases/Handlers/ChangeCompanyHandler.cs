@@ -12,10 +12,6 @@ public class ChangeCompanyHandler(ICompanyRepository repository)
     public async Task<GenericCommandResult> Handle(ChangeCompanyCommand command,
         CancellationToken cancellationToken)
     {
-        // Check permissions
-        if (!command.Permission.IsValid())
-            return new GenericCommandResult(null, false, "You do not have permission to perform this action");
-        
         // Fast Fail Validation
         if (!command.IsValid)
             return new GenericCommandResult(command.Notifications, false, "Ops, this holding is invalid");

@@ -35,13 +35,17 @@ public class ChangeCompanyCommand : Notifiable<Notification>, IRequest<GenericCo
         ContactFullName = contactFullName;
         ContactEmail = contactEmail;
         ContactPhone = contactPhone;
-        
-        Permission = new ChangeCompanyPermission(Parser.ToRole(role));
 
         AddNotifications(new ChangeCompanyValidation(this));
         AddNotifications(new CustomNotification().IsGuid(id, "Id", "Id is invalid"));
+        
+        AddNotifications(
+            new CustomNotification().HasPermission(
+                new ChangeCompanyPermission(Parser.ToRole(role))
+            )
+        );
     }
-    
+
     public Guid Id { get; private set; }
     public string Name { get; private set; }
 
@@ -53,6 +57,4 @@ public class ChangeCompanyCommand : Notifiable<Notification>, IRequest<GenericCo
     public string ContactFullName { get; private set; }
     public string ContactEmail { get; private set; }
     public string ContactPhone { get; private set; }
-    
-    public BasePermission Permission { get; private set; }
 }

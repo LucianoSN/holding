@@ -14,7 +14,8 @@ public class ChangeCompanyTests
         string addressStreet = "AddressStreetName",
         string contactFullName = "ContatctFullName",
         string contactEmail = "valid@email.com",
-        string contactPhone = "123456789"
+        string contactPhone = "123456789",
+        string role = "SuperAdministrator"
     )
     {
         var command = new ChangeCompanyCommand(
@@ -26,7 +27,8 @@ public class ChangeCompanyTests
             addressStreet,
             contactFullName,
             contactEmail,
-            contactPhone
+            contactPhone,
+            role
         );
 
         return command;
@@ -38,18 +40,18 @@ public class ChangeCompanyTests
         var command = Sut(Guid.NewGuid().ToString(), "");
         Assert.AreEqual(command.IsValid, false);
     }
-   
-   [TestMethod]
-   public void ShoudReturnInvalidWhenGuidIsInvalid()
-   {
-       var command = Sut("00-93343-00");
-       Assert.AreEqual(command.IsValid, false);
-   }
-   
-   [TestMethod]
-   public void ShoudReturnValidWhenCommandIsValid()
-   {
-       var command = Sut(Guid.NewGuid().ToString());
-       Assert.AreEqual(command.IsValid, true);
-   }
+
+    [TestMethod]
+    public void ShoudReturnInvalidWhenGuidIsInvalid()
+    {
+        var command = Sut("00-93343-00");
+        Assert.AreEqual(command.IsValid, false);
+    }
+
+    [TestMethod]
+    public void ShoudReturnValidWhenCommandIsValid()
+    {
+        var command = Sut(Guid.NewGuid().ToString());
+        Assert.AreEqual(command.IsValid, true);
+    }
 }
