@@ -31,7 +31,7 @@ public class GetAllHoldingHandlerTests
     public async Task ShoudReturnInvalidWhenGetAllHoldingIsEmpty()
     {
         // Arrange
-        var command = new GetAllHoldingCommand();
+        var command = new GetAllHoldingCommand(role: "Master");
 
         // Act
         var result = await _getAllSut.Handle(command, CancellationToken.None);
@@ -47,7 +47,7 @@ public class GetAllHoldingHandlerTests
     {
         // Arrange
         await CreateHoldingSut("Holding", "Holding Description");
-        var command = new GetAllHoldingCommand();
+        var command = new GetAllHoldingCommand(role: "Master");
 
         // Act
         var result = await _getAllSut.Handle(command, CancellationToken.None);

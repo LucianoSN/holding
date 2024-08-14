@@ -1,15 +1,24 @@
 ﻿using Flunt.Notifications;
+using Holding.Company.Domain.Company.UseCases.Commands.Permissions;
 using Holding.Core.DomainObjects.Results;
+using Holding.Core.Helpers;
+using Holding.Core.Validations.Notifications;
 using MediatR;
 
 namespace Holding.Company.Domain.Company.UseCases.Commands;
 
 public class GetAllHoldingCommand : Notifiable<Notification>, IRequest<PagedCommandResult>
 {
-    public GetAllHoldingCommand(int currentPage = 1, int pageSize = 25)
+    public GetAllHoldingCommand(int currentPage = 1, int pageSize = 25, string role = "")
     {
         CurrentPage = currentPage;
         PageSize = pageSize;
+
+        AddNotifications(
+            new CustomNotification().HasPermission(
+                new GetAllHoldingPermission(Parser.ToRole(role))
+            )
+        );
     }
 
     public int CurrentPage { get; private set; }    
