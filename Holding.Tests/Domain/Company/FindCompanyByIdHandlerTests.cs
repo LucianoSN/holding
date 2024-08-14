@@ -54,7 +54,7 @@ public class FindCompanyByIdHandlerTests
     {
         // Arrange
         var company = await CreateCompanySut(Guid.NewGuid().ToString());
-        var command = new FindCompanyByIdCommand(company.Id.ToString());
+        var command = new FindCompanyByIdCommand(company.Id.ToString(), "Administrator");
 
         // Act
         var result = await _findSut.Handle(command, CancellationToken.None);
@@ -68,7 +68,7 @@ public class FindCompanyByIdHandlerTests
     public async Task ShoudReturnInvalidWhenFindHoldingByIdNotFound()
     {
         // Arrange
-        var command = new FindCompanyByIdCommand(Guid.NewGuid().ToString());
+        var command = new FindCompanyByIdCommand(Guid.NewGuid().ToString(), "Administrator");
 
         // Act
         var result = await _findSut.Handle(command, CancellationToken.None);
