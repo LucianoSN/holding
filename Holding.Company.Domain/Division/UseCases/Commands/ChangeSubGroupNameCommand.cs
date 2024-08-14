@@ -1,4 +1,5 @@
 ﻿using Flunt.Notifications;
+using Holding.Company.Domain.Division.UseCases.Commands.Permissions;
 using Holding.Company.Domain.Division.UseCases.Commands.Validations;
 using Holding.Core.DomainObjects.Results;
 using Holding.Core.Helpers;
@@ -9,7 +10,7 @@ namespace Holding.Company.Domain.Division.UseCases.Commands;
 
 public class ChangeSubGroupNameCommand : Notifiable<Notification>, IRequest<GenericCommandResult>
 {
-    public ChangeSubGroupNameCommand(string id, string groupId, string name)
+    public ChangeSubGroupNameCommand(string id, string groupId, string name, string role = "")
     {
         Id = Parser.ToGuid(id);
         GroupId = Parser.ToGuid(groupId);
@@ -18,6 +19,12 @@ public class ChangeSubGroupNameCommand : Notifiable<Notification>, IRequest<Gene
         AddNotifications(new ChangeSubGroupNameValidation(this));
         AddNotifications(new CustomNotification().IsGuid(id, "Id", "Id is invalid"));
         AddNotifications(new CustomNotification().IsGuid(groupId, "GroupId", "GroupId is invalid"));
+
+        AddNotifications(
+            new CustomNotification().HasPermission(
+                new ChangeSubGroupNamePermission(Parser.ToRole(role))
+            )
+        );
     }
 
     public Guid Id { get; private set; }

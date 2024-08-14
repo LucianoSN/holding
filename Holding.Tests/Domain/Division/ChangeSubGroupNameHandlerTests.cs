@@ -47,7 +47,8 @@ public class ChangeSubGroupNameHandlerTests
         var command = new ChangeSubGroupNameCommand(
             group.SubGroups.First().Id.ToString(),
             group.Id.ToString(),
-            "SubGroupCreation02"
+            "SubGroupCreation02",
+            "Administrator"
         );
 
         // Act
@@ -69,7 +70,8 @@ public class ChangeSubGroupNameHandlerTests
         var command = new ChangeSubGroupNameCommand(
             group.SubGroups.First().Id.ToString(),
             group.Id.ToString(),
-            name
+            name,
+            "Administrator"
         );
 
         // Act

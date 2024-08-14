@@ -5,8 +5,8 @@ namespace Holding.Tests.Domain.Division;
 [TestClass]
 public class ChangeSubGroupNameCommandTests
 {
-   private static ChangeSubGroupNameCommand Sut(string id, string groupId, string name = "")
-       => new(id, groupId, name);
+   private static ChangeSubGroupNameCommand Sut(string id, string groupId, string name = "", string role = "Administrator")
+       => new(id, groupId, name, role);
    
    [TestMethod]
    public void ShoudReturnInvalidWhenGroupIdIsInvalid()
