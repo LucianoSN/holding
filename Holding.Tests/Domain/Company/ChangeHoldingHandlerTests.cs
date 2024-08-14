@@ -20,7 +20,8 @@ public class ChangeHoldingHandlerTests
 
     private async Task<Holding.Company.Domain.Company.Entities.Holding> CreateHoldingSut(
         string name,
-        string description = "")
+        string description = ""
+    )
     {
         var command = new CreateHoldingCommand(name, description);
         var result = await _createSut.Handle(command, CancellationToken.None);
@@ -32,7 +33,12 @@ public class ChangeHoldingHandlerTests
     {
         // Arrange
         var holding = await CreateHoldingSut("Holding", "Holding Description");
-        var command = new ChangeHoldingCommand(holding.Id.ToString(), "ChangeHoldingName", "Change Holding Description");
+        var command = new ChangeHoldingCommand(
+            holding.Id.ToString(),
+            "ChangeHoldingName",
+            "Change Holding Description",
+            "Master"
+        );
 
         // Act
         var result = await _changeSut.Handle(command, CancellationToken.None);
