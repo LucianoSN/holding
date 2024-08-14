@@ -14,7 +14,7 @@ public class ChangeCompanyHandler(ICompanyRepository repository)
     {
         // Fast Fail Validation
         if (!command.IsValid)
-            return new GenericCommandResult(command.Notifications, false, "Ops, this holding is invalid");
+            return new GenericCommandResult(command.Notifications, false, "Ops, this company is invalid");
 
         // Get the company        
         var company = await repository.GetCompanyById(command.Id);
