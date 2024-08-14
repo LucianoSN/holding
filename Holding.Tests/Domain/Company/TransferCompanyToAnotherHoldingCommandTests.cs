@@ -5,9 +5,9 @@ namespace Holding.Tests.Domain.Company;
 [TestClass]
 public class TransferCompanyToAnotherHoldingCommandTests
 {
-    private static TransferCompanyToAnotherHoldingCommand Sut(string companyId, string holdingId)
+    private static TransferCompanyToAnotherHoldingCommand Sut(string companyId, string holdingId, string role = "Master")
     {
-        return new TransferCompanyToAnotherHoldingCommand(companyId, holdingId);
+        return new TransferCompanyToAnotherHoldingCommand(companyId, holdingId, role);
     }
 
     [TestMethod]

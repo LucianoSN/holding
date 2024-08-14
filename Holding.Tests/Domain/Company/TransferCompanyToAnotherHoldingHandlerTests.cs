@@ -55,7 +55,11 @@ public class TransferCompanyToAnotherHoldingHandlerTests
         // Arrange
         var newHoldingId = Guid.NewGuid();
         var company = await CreateCompanySut(Guid.NewGuid().ToString());
-        var command = new TransferCompanyToAnotherHoldingCommand(company.Id.ToString(), newHoldingId.ToString());
+        var command = new TransferCompanyToAnotherHoldingCommand(
+            company.Id.ToString(),
+            newHoldingId.ToString(),
+            "Master"
+        );
 
         // Act
         var result = await _tranferSut.Handle(command, CancellationToken.None);
