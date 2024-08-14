@@ -28,7 +28,8 @@ public class TransferCompanyToAnotherHoldingHandlerTests
         string addressStreet = "AddressStreetName",
         string contactFullName = "ContatctFullName",
         string contactEmail = "valid@email.com",
-        string contactPhone = "123456789"
+        string contactPhone = "123456789",
+        string role = "SuperAdministrator"
     )
     {
         var command = new CreateCompanyCommand(
@@ -40,7 +41,8 @@ public class TransferCompanyToAnotherHoldingHandlerTests
             addressStreet,
             contactFullName,
             contactEmail,
-            contactPhone
+            contactPhone,
+            role
         );
 
         var result = await _createSut.Handle(command, CancellationToken.None);

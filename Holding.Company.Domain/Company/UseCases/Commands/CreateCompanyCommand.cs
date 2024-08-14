@@ -1,4 +1,5 @@
 ﻿using Flunt.Notifications;
+using Holding.Company.Domain.Company.UseCases.Commands.Permissions;
 using Holding.Company.Domain.Company.UseCases.Commands.Validations;
 using Holding.Core.DomainObjects.Results;
 using Holding.Core.Helpers;
@@ -19,7 +20,8 @@ public class CreateCompanyCommand : Notifiable<Notification>, IRequest<GenericCo
         string addressStreet,
         string contactFullName,
         string contactEmail,
-        string contactPhone
+        string contactPhone,
+        string role = ""
     )
     {
         HoldingId = Parser.ToGuid(holdingId);
@@ -36,6 +38,12 @@ public class CreateCompanyCommand : Notifiable<Notification>, IRequest<GenericCo
 
         AddNotifications(new CreateCompanyValidation(this));
         AddNotifications(new CustomNotification().IsGuid(holdingId, "HoldingId", "HoldingId is invalid"));
+
+        AddNotifications(
+            new CustomNotification().HasPermission(
+                new CreateCompanyPermission(Parser.ToRole(role))
+            )
+        );
     }
 
     public Guid HoldingId { get; private set; }

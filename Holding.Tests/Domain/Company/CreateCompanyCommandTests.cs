@@ -26,7 +26,8 @@ public class CreateCompanyCommandTests
             addressStreet,
             contactFullName,
             contactEmail,
-            contactPhone
+            contactPhone,
+            "SuperAdministrator"
         );
 
         return command;
