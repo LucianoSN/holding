@@ -18,12 +18,12 @@ public abstract class BasePermission
 
     private Role Role { get; set; }
 
-    protected void ChangePartner(bool value) => Partner = value;
-    protected void ChangeSuperAdministrator(bool value) => SuperAdministrator = value;
-    protected void ChangeAdministrator(bool value) => Administrator = value;
-    protected void ChangeEditor(bool value) => Editor = value;
-    protected void ChangeParticipant(bool value) => Participant = value;
-    protected void ChangeIntegration(bool value) => Integration = value;
+    protected void PartnerHasPermission() => Partner = true;
+    protected void SuperAdministratorHasPermission() => SuperAdministrator = true;
+    protected void AdministratorHasPermission() => Administrator = true;
+    protected void EditorHasPermission() => Editor = true;
+    protected void ParticipantHasPermission() => Participant = true;
+    protected void IntegrationHasPermission() => Integration = true;
 
     protected abstract void SetPermission();
 
