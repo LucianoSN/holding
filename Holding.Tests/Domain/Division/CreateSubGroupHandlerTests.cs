@@ -27,7 +27,7 @@ public class CreateSubGroupHandlerTests
         var result = await _createSut.Handle(command, CancellationToken.None);
         
         var group = result.Data as Group;
-        var subGroupCommand = new CreateSubGroupCommand(group.Id.ToString(), "SubGroupCreation01");
+        var subGroupCommand = new CreateSubGroupCommand(group.Id.ToString(), "SubGroupCreation01", role);
         await _addSubGroupSut.Handle(subGroupCommand, CancellationToken.None);
         
         return group;
@@ -38,7 +38,7 @@ public class CreateSubGroupHandlerTests
     {
         // Arrange
         var group = await CreateGroupSut(_companyId.ToString(), "GroupCreation");
-        var command = new CreateSubGroupCommand(group.Id.ToString(), "SubGroupCreation01");
+        var command = new CreateSubGroupCommand(group.Id.ToString(), "SubGroupCreation01", "Administrator");
         
         // Act
         var result = await _addSubGroupSut.Handle(command, CancellationToken.None);
@@ -55,7 +55,7 @@ public class CreateSubGroupHandlerTests
     {
         // Arrange
         var group = await CreateGroupSut(_companyId.ToString(), "GroupCreation");
-        var command = new CreateSubGroupCommand(group.Id.ToString(), "SubGroupCreation02");
+        var command = new CreateSubGroupCommand(group.Id.ToString(), "SubGroupCreation02", "Administrator");
         
         // Act
         var result = await _addSubGroupSut.Handle(command, CancellationToken.None);

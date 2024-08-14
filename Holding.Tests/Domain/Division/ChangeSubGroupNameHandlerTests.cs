@@ -30,10 +30,10 @@ public class ChangeSubGroupNameHandlerTests
         if (result.Success) await _repository.Transact.Commit();
 
         var group = result.Data as Group;
-        var subGroupCommand1 = new CreateSubGroupCommand(group.Id.ToString(), "SubGroupCreation01");
+        var subGroupCommand1 = new CreateSubGroupCommand(group.Id.ToString(), "SubGroupCreation01", role);
         await _addSubGroupSut.Handle(subGroupCommand1, CancellationToken.None);
 
-        var subGroupCommand2 = new CreateSubGroupCommand(group.Id.ToString(), "SubGroupCreation02");
+        var subGroupCommand2 = new CreateSubGroupCommand(group.Id.ToString(), "SubGroupCreation02", role);
         await _addSubGroupSut.Handle(subGroupCommand2, CancellationToken.None);
 
         return group;

@@ -5,8 +5,8 @@ namespace Holding.Tests.Domain.Division;
 [TestClass]
 public class CreateSubGroupCommandTests
 {
-   private static CreateSubGroupCommand Sut(string groupId, string name = "")
-       => new(groupId, name); 
+   private static CreateSubGroupCommand Sut(string groupId, string name = "", string role = "Administrator")
+       => new(groupId, name, role); 
    
    [TestMethod]
    public void ShoudReturnInvalidWhenCommandIsInvalid()
