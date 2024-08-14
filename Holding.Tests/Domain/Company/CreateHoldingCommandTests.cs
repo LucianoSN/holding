@@ -5,8 +5,11 @@ namespace Holding.Tests.Domain.Company;
 [TestClass]
 public class CreateHoldingCommandTests
 {
-   private static CreateHoldingCommand Sut(string name = "Holding", string? description = "Holding Description")
-       => new(name, description);
+   private static CreateHoldingCommand Sut(
+       string name = "Holding", 
+       string? description = "Holding Description",
+       string role = "Master"
+       ) => new(name, description, role);
    
    [TestMethod]
    public void ShoudReturnInvalidWhenCommandIsInvalid()

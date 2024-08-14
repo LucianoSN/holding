@@ -20,9 +20,11 @@ public class FindHoldingHandlerTests
 
     private async Task<Holding.Company.Domain.Company.Entities.Holding> CreateHoldingSut(
         string name,
-        string description = "")
+        string description = "",
+        string role = "Master"
+    )
     {
-        var command = new CreateHoldingCommand(name, description);
+        var command = new CreateHoldingCommand(name, description, role);
         var result = await _createSut.Handle(command, CancellationToken.None);
         return await _repository.GetHoldingById((result.Data as Holding.Company.Domain.Company.Entities.Holding).Id);
     }
@@ -41,7 +43,7 @@ public class FindHoldingHandlerTests
         Assert.AreEqual(command.IsValid, true);
         Assert.AreEqual(result.Success, true);
     }
-    
+
     [TestMethod]
     public async Task ShoudReturnInvalidWhenFindHoldingByIdNotFound()
     {

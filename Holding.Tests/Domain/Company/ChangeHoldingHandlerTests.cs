@@ -20,10 +20,11 @@ public class ChangeHoldingHandlerTests
 
     private async Task<Holding.Company.Domain.Company.Entities.Holding> CreateHoldingSut(
         string name,
-        string description = ""
+        string description = "",
+        string role =  "Master"
     )
     {
-        var command = new CreateHoldingCommand(name, description);
+        var command = new CreateHoldingCommand(name, description, role);
         var result = await _createSut.Handle(command, CancellationToken.None);
         return await _repository.GetHoldingById((result.Data as Holding.Company.Domain.Company.Entities.Holding).Id);
     }
