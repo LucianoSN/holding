@@ -27,7 +27,7 @@ public static class Parser
         
         return stringValue.ToLower() switch
         {
-            "partner" => Role.Partner,
+            "master" => Role.Master,
             "superadministrator" => Role.SuperAdministrator,
             "administrator" => Role.Administrator,
             "editor" => Role.Editor,

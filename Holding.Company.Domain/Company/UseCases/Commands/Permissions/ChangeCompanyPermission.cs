@@ -12,7 +12,6 @@ public class ChangeCompanyPermission : BasePermission
     
     protected sealed override void SetPermission()
     {
-        PartnerHasPermission();
         SuperAdministratorHasPermission();
     }
 }

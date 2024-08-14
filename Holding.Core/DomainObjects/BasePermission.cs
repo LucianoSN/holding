@@ -9,7 +9,7 @@ public abstract class BasePermission
         Role = role;
     }
 
-    private bool Partner { get; set; }
+    private bool Master { get; set; } = true;
     private bool SuperAdministrator { get; set; }
     private bool Administrator { get; set; }
     private bool Editor { get; set; }
@@ -19,7 +19,6 @@ public abstract class BasePermission
 
     private Role Role { get; set; }
 
-    protected void PartnerHasPermission() => Partner = true;
     protected void SuperAdministratorHasPermission() => SuperAdministrator = true;
     protected void AdministratorHasPermission() => Administrator = true;
     protected void EditorHasPermission() => Editor = true;
@@ -30,7 +29,7 @@ public abstract class BasePermission
 
     public bool IsValid()
     {
-        if (Role.Equals(Role.Partner)) return Partner;
+        if (Role.Equals(Role.Master)) return Master;
         if (Role.Equals(Role.SuperAdministrator)) return SuperAdministrator;
         if (Role.Equals(Role.Administrator)) return Administrator;
         if (Role.Equals(Role.Editor)) return Editor;

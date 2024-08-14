@@ -2,7 +2,7 @@
 
 public enum Role
 {
-    Partner,
+    Master,
     SuperAdministrator,
     Administrator,
     Editor,
