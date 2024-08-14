@@ -23,7 +23,7 @@ public static class Parser
     
     public static Role ToRole(this string stringValue)
     {
-        if (string.IsNullOrEmpty(stringValue)) return Role.Participant;
+        if (string.IsNullOrEmpty(stringValue)) return Role.Undefined;
         
         return stringValue.ToLower() switch
         {
