@@ -7,5 +7,6 @@ public enum Role
     Administrator,
     Editor,
     Participant,
-    Integration
+    Integration,
+    Undefined
 }

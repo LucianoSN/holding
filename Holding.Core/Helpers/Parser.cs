@@ -33,7 +33,8 @@ public static class Parser
             "editor" => Role.Editor,
             "participant" => Role.Participant,
             "integration" => Role.Integration,
-            _ => Role.Participant
+            "undefined" => Role.Undefined,
+            _ => Role.Undefined
         };
     }
 }

@@ -15,6 +15,7 @@ public abstract class BasePermission
     private bool Editor { get; set; }
     private bool Participant { get; set; }
     private bool Integration { get; set; }
+    private bool Undefined { get; set; }
 
     private Role Role { get; set; }
 
@@ -35,6 +36,7 @@ public abstract class BasePermission
         if (Role.Equals(Role.Editor)) return Editor;
         if (Role.Equals(Role.Participant)) return Participant;
         if (Role.Equals(Role.Integration)) return Integration;
+        if (Role.Equals(Role.Undefined)) return Undefined;
 
         return false;
     }
