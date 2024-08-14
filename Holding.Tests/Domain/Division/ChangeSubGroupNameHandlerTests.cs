@@ -23,9 +23,9 @@ public class ChangeSubGroupNameHandlerTests
         _companyId = Guid.NewGuid();
     }
 
-    private async Task<Group?> CreateGroupSut(string companyId, string name = "")
+    private async Task<Group?> CreateGroupSut(string companyId, string name = "", string role = "Administrator")
     {
-        var command = new CreateGroupCommand(companyId, name);
+        var command = new CreateGroupCommand(companyId, name, role);
         var result = await _createSut.Handle(command, CancellationToken.None);
         if (result.Success) await _repository.Transact.Commit();
 

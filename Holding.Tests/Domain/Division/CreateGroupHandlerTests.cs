@@ -37,7 +37,7 @@ public class CreateGroupHandlerTests
     public async Task ShouldCreateHoldingIsValid()
     {
         // Arrange
-        var command = new CreateGroupCommand(_companyId.ToString(), "Group Test");
+        var command = new CreateGroupCommand(_companyId.ToString(), "Group Test", "Administrator");
     
         // Act
         var result = await _sut.Handle(command, CancellationToken.None);

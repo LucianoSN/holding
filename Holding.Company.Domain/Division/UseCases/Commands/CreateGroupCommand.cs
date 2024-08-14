@@ -1,4 +1,5 @@
 ﻿using Flunt.Notifications;
+using Holding.Company.Domain.Division.UseCases.Commands.Permissions;
 using Holding.Company.Domain.Division.UseCases.Commands.Validations;
 using Holding.Core.DomainObjects.Results;
 using Holding.Core.Helpers;
@@ -9,13 +10,19 @@ namespace Holding.Company.Domain.Division.UseCases.Commands;
 
 public class CreateGroupCommand : Notifiable<Notification>, IRequest<GenericCommandResult>
 {
-    public CreateGroupCommand(string companyId, string name)
+    public CreateGroupCommand(string companyId, string name, string role = "")
     {
         CompanyId = Parser.ToGuid(companyId);
         Name = name;
         
         AddNotifications(new CreateGroupValidation(this));
         AddNotifications(new CustomNotification().IsGuid(companyId, "CompanyId", "CompanyId is invalid"));
+
+        AddNotifications(
+            new CustomNotification().HasPermission(
+                new CreateGroupPermission(Parser.ToRole(role))
+            )
+        );
     }
 
     public Guid CompanyId { get; private set; }
