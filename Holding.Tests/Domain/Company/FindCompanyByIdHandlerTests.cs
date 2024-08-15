@@ -1,21 +1,16 @@
-﻿using Holding.Company.Domain.Company.Queries;
-using Holding.Company.Domain.Company.UseCases.Commands;
-using Holding.Company.Domain.Company.UseCases.Handlers;
+﻿using Holding.Company.Domain.Company.UseCases.Commands;
+using MediatR;
 
 namespace Holding.Tests.Domain.Company;
 
 [TestClass]
 public class FindCompanyByIdHandlerTests
 {
-    private ICompanyRepository _repository;
-    private readonly CreateCompanyHandler _createSut;
-    private readonly FindCompanyByIdHandler _findSut;
+    private IMediator _bus;
 
     public FindCompanyByIdHandlerTests()
     {
-        _repository = DependencyInjection.Get<ICompanyRepository>();
-        _createSut = new CreateCompanyHandler(_repository);
-        _findSut = new FindCompanyByIdHandler(_repository);
+        _bus = DependencyInjection.Get<IMediator>();
     }
 
     private async Task<Holding.Company.Domain.Company.Entities.Company> CreateCompanySut(
@@ -44,9 +39,8 @@ public class FindCompanyByIdHandlerTests
             role
         );
 
-        var result = await _createSut.Handle(command, CancellationToken.None);
-        
-        return await _repository.GetCompanyById((result.Data as Holding.Company.Domain.Company.Entities.Company).Id);
+        var result = await _bus.Send(command);
+        return result.Data as Holding.Company.Domain.Company.Entities.Company;
     }
     
     [TestMethod]
@@ -57,7 +51,7 @@ public class FindCompanyByIdHandlerTests
         var command = new FindCompanyByIdCommand(company.Id.ToString(), "Administrator");
 
         // Act
-        var result = await _findSut.Handle(command, CancellationToken.None);
+        var result = await _bus.Send(command);
 
         // Assert
         Assert.AreEqual(command.IsValid, true);
@@ -71,7 +65,7 @@ public class FindCompanyByIdHandlerTests
         var command = new FindCompanyByIdCommand(Guid.NewGuid().ToString(), "Administrator");
 
         // Act
-        var result = await _findSut.Handle(command, CancellationToken.None);
+        var result = await _bus.Send(command);
 
         // Assert
         Assert.AreEqual(command.IsValid, true);

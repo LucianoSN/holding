@@ -1,19 +1,16 @@
-﻿using Holding.Company.Domain.Company.Queries;
-using Holding.Company.Domain.Company.UseCases.Commands;
-using Holding.Company.Domain.Company.UseCases.Handlers;
+﻿using Holding.Company.Domain.Company.UseCases.Commands;
+using MediatR;
 
 namespace Holding.Tests.Domain.Company;
 
 [TestClass]
 public class CreateHoldingHandlerTest
 {
-    private ICompanyRepository _repository;
-    private readonly CreateHoldingHandler _sut;
+    private IMediator _bus;
 
     public CreateHoldingHandlerTest()
     {
-        _repository = DependencyInjection.Get<ICompanyRepository>();
-        _sut = new CreateHoldingHandler(_repository);
+        _bus = DependencyInjection.Get<IMediator>();
     }
 
     [TestMethod]
@@ -23,7 +20,7 @@ public class CreateHoldingHandlerTest
         var command = new CreateHoldingCommand("");
 
         // Act
-        var result = await _sut.Handle(command, CancellationToken.None);
+        var result = await _bus.Send(command);
 
         // Assert
         Assert.AreEqual(result.Success, false);
@@ -40,9 +37,8 @@ public class CreateHoldingHandlerTest
         );
 
         // Act
-        var result = await _sut.Handle(command, CancellationToken.None);
-        var holdings =
-            await _repository.GetHoldingById((result.Data as Holding.Company.Domain.Company.Entities.Holding).Id);
+        var result = await _bus.Send(command);
+        var holdings = result.Data as Holding.Company.Domain.Company.Entities.Holding;
 
         // Assert
         Assert.AreEqual(result.Success, true);

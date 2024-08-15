@@ -1,19 +1,16 @@
-﻿using Holding.Company.Domain.Company.Queries;
-using Holding.Company.Domain.Company.UseCases.Commands;
-using Holding.Company.Domain.Company.UseCases.Handlers;
+﻿using Holding.Company.Domain.Company.UseCases.Commands;
+using MediatR;
 
 namespace Holding.Tests.Domain.Company;
 
 [TestClass]
 public class CreateCompanyHandlerTest
 {
-    private ICompanyRepository _repository;
-    private readonly CreateCompanyHandler _sut;
+    private IMediator _bus;
 
     public CreateCompanyHandlerTest()
     {
-        _repository = DependencyInjection.Get<ICompanyRepository>();
-        _sut = new CreateCompanyHandler(_repository);
+        _bus = DependencyInjection.Get<IMediator>();
     }
     
     private static CreateCompanyCommand SutCommand(
@@ -52,7 +49,7 @@ public class CreateCompanyHandlerTest
         var command = SutCommand("");
 
         // Act
-        var result = await _sut.Handle(command, CancellationToken.None);
+        var result = await _bus.Send(command);
 
         // Assert
         Assert.AreEqual(result.Success, false);
@@ -65,8 +62,8 @@ public class CreateCompanyHandlerTest
         var command = SutCommand(Guid.NewGuid().ToString());
 
         // Act
-        var result = await _sut.Handle(command, CancellationToken.None);
-        var company = await _repository.GetCompanyById((result.Data as Holding.Company.Domain.Company.Entities.Company).Id);
+        var result = await _bus.Send(command, CancellationToken.None);
+        var company = result.Data as Holding.Company.Domain.Company.Entities.Company;
 
         // Assert
         Assert.AreEqual(result.Success, true);

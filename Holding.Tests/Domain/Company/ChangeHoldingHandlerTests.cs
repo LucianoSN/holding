@@ -1,21 +1,16 @@
-﻿using Holding.Company.Domain.Company.Queries;
-using Holding.Company.Domain.Company.UseCases.Commands;
-using Holding.Company.Domain.Company.UseCases.Handlers;
+﻿using Holding.Company.Domain.Company.UseCases.Commands;
+using MediatR;
 
 namespace Holding.Tests.Domain.Company;
 
 [TestClass]
 public class ChangeHoldingHandlerTests
 {
-    private ICompanyRepository _repository;
-    private readonly CreateHoldingHandler _createSut;
-    private readonly ChangeHoldingHandler _changeSut;
+    private IMediator _bus;
 
     public ChangeHoldingHandlerTests()
     {
-        _repository = DependencyInjection.Get<ICompanyRepository>();
-        _createSut = new CreateHoldingHandler(_repository);
-        _changeSut = new ChangeHoldingHandler(_repository);
+        _bus = DependencyInjection.Get<IMediator>();
     }
 
     private async Task<Holding.Company.Domain.Company.Entities.Holding> CreateHoldingSut(
@@ -25,8 +20,8 @@ public class ChangeHoldingHandlerTests
     )
     {
         var command = new CreateHoldingCommand(name, description, role);
-        var result = await _createSut.Handle(command, CancellationToken.None);
-        return await _repository.GetHoldingById((result.Data as Holding.Company.Domain.Company.Entities.Holding).Id);
+        var result = await _bus.Send(command);
+        return result.Data as Holding.Company.Domain.Company.Entities.Holding;
     }
 
     [TestMethod]
@@ -42,14 +37,14 @@ public class ChangeHoldingHandlerTests
         );
 
         // Act
-        var result = await _changeSut.Handle(command, CancellationToken.None);
-        var changedHolding = await _repository.GetHoldingById(holding.Id);
+        var result = await _bus.Send(command);
+        var changed = result.Data as Holding.Company.Domain.Company.Entities.Holding;
 
         // Assert
         Assert.AreEqual(command.IsValid, true);
         Assert.AreEqual(result.Success, true);
-        Assert.AreEqual(holding.Id, changedHolding.Id);
-        Assert.AreEqual(holding.Name, changedHolding.Name);
-        Assert.AreEqual(holding.Description, changedHolding.Description);
+        Assert.AreEqual(holding.Id, changed.Id);
+        Assert.AreEqual(holding.Name, changed.Name);
+        Assert.AreEqual(holding.Description, changed.Description);
     }
 }

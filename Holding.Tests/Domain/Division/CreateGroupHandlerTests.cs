@@ -1,7 +1,5 @@
 ﻿using Holding.Company.Domain.Division.Entities;
-using Holding.Company.Domain.Division.Queries;
 using Holding.Company.Domain.Division.UseCases.Commands;
-using Holding.Company.Domain.Division.UseCases.Handlers;
 using MediatR;
 
 namespace Holding.Tests.Domain.Division;

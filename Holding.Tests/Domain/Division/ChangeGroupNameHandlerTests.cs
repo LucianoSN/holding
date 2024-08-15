@@ -1,30 +1,25 @@
 ﻿using Holding.Company.Domain.Division.Entities;
-using Holding.Company.Domain.Division.Queries;
 using Holding.Company.Domain.Division.UseCases.Commands;
-using Holding.Company.Domain.Division.UseCases.Handlers;
+using MediatR;
 
 namespace Holding.Tests.Domain.Division;
 
 [TestClass]
 public class ChangeGroupNameHandlerTests
 {
-    private IGroupRepository _repository;
-    private readonly CreateGroupHandler _createSut;
-    private readonly ChangeGroupNameHandler _changeSut;
+    private IMediator _bus;
     private Guid _companyId;
 
     public ChangeGroupNameHandlerTests()
     {
-        _repository = DependencyInjection.Get<IGroupRepository>();
-        _createSut = new CreateGroupHandler(_repository);
-        _changeSut = new ChangeGroupNameHandler(_repository);
+        _bus = DependencyInjection.Get<IMediator>();
         _companyId = Guid.NewGuid();
     }
     
     private async Task<Group?> CreateGroupSut(string companyId, string name = "", string role = "Administrator")
     {
         var command = new CreateGroupCommand(companyId, name, role);
-        var result = await _createSut.Handle(command, CancellationToken.None);
+        var result = await _bus.Send(command);
         return result.Data as Group;
     }
 
@@ -37,8 +32,8 @@ public class ChangeGroupNameHandlerTests
        var command = new ChangeGroupNameCommand(group.Id.ToString(), name, "Administrator");
        
        // Act
-       var result = await _changeSut.Handle(command, CancellationToken.None);
-       var changedGroup = await _repository.GetGroupById(group.Id);
+        var result = await _bus.Send(command);
+       var changedGroup = result.Data as Group;
        
         // Assert
         Assert.AreEqual(command.IsValid, true);

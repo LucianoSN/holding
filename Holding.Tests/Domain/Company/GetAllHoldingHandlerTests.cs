@@ -1,20 +1,16 @@
-﻿using Holding.Company.Domain.Company.Queries;
-using Holding.Company.Domain.Company.UseCases.Commands;
-using Holding.Company.Domain.Company.UseCases.Handlers;
+﻿using Holding.Company.Domain.Company.UseCases.Commands;
+using MediatR;
 
 namespace Holding.Tests.Domain.Company;
 
 [TestClass]
 public class GetAllHoldingHandlerTests
 {
-    private readonly CreateHoldingHandler _createSut;
-    private readonly GetAllHoldingHandler _getAllSut;
+    private IMediator _bus;
 
     public GetAllHoldingHandlerTests()
     {
-        var repository = DependencyInjection.Get<ICompanyRepository>();
-        _createSut = new CreateHoldingHandler(repository);
-        _getAllSut = new GetAllHoldingHandler(repository);
+        _bus = DependencyInjection.Get<IMediator>();
     }
 
     private async Task CreateHoldingSut(
@@ -24,7 +20,7 @@ public class GetAllHoldingHandlerTests
     )
     {
         var command = new CreateHoldingCommand(name, description, role);
-        await _createSut.Handle(command, CancellationToken.None);
+        await _bus.Send(command);
     }
 
     [TestMethod]
@@ -34,7 +30,7 @@ public class GetAllHoldingHandlerTests
         var command = new GetAllHoldingCommand(role: "Master");
 
         // Act
-        var result = await _getAllSut.Handle(command, CancellationToken.None);
+        var result = await _bus.Send(command);
 
         // Assert
         Assert.AreEqual(command.IsValid, true);
@@ -50,7 +46,7 @@ public class GetAllHoldingHandlerTests
         var command = new GetAllHoldingCommand(role: "Master");
 
         // Act
-        var result = await _getAllSut.Handle(command, CancellationToken.None);
+        var result = await _bus.Send(command);
 
         // Assert
         Assert.AreEqual(command.IsValid, true);

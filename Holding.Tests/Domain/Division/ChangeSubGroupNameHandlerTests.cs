@@ -1,40 +1,32 @@
 ﻿using Holding.Company.Domain.Division.Entities;
-using Holding.Company.Domain.Division.Queries;
 using Holding.Company.Domain.Division.UseCases.Commands;
-using Holding.Company.Domain.Division.UseCases.Handlers;
+using MediatR;
 
 namespace Holding.Tests.Domain.Division;
 
 [TestClass]
 public class ChangeSubGroupNameHandlerTests
 {
-    private IGroupRepository _repository;
-    private readonly CreateGroupHandler _createSut;
-    private readonly CreateSubGroupHandler _addSubGroupSut;
-    private readonly ChangeSubGroupNameHandler _changeSubGroupSut;
+    private IMediator _bus;
     private Guid _companyId;
 
     public ChangeSubGroupNameHandlerTests()
     {
-        _repository = DependencyInjection.Get<IGroupRepository>();
-        _createSut = new CreateGroupHandler(_repository);
-        _addSubGroupSut = new CreateSubGroupHandler(_repository);
-        _changeSubGroupSut = new ChangeSubGroupNameHandler(_repository);
+        _bus = DependencyInjection.Get<IMediator>();
         _companyId = Guid.NewGuid();
     }
 
     private async Task<Group?> CreateGroupSut(string companyId, string name = "", string role = "Administrator")
     {
         var command = new CreateGroupCommand(companyId, name, role);
-        var result = await _createSut.Handle(command, CancellationToken.None);
-        if (result.Success) await _repository.Transact.Commit();
+        var result = await _bus.Send(command);
 
         var group = result.Data as Group;
         var subGroupCommand1 = new CreateSubGroupCommand(group.Id.ToString(), "SubGroupCreation01", role);
-        await _addSubGroupSut.Handle(subGroupCommand1, CancellationToken.None);
+        await _bus.Send(subGroupCommand1);
 
         var subGroupCommand2 = new CreateSubGroupCommand(group.Id.ToString(), "SubGroupCreation02", role);
-        await _addSubGroupSut.Handle(subGroupCommand2, CancellationToken.None);
+        await _bus.Send(subGroupCommand2);
 
         return group;
     }
@@ -52,7 +44,7 @@ public class ChangeSubGroupNameHandlerTests
         );
 
         // Act
-        var result = await _changeSubGroupSut.Handle(command, CancellationToken.None);
+        var result = await _bus.Send(command);
 
         // Assert
         Assert.AreEqual(command.IsValid, true);
@@ -75,13 +67,13 @@ public class ChangeSubGroupNameHandlerTests
         );
 
         // Act
-        var result = await _changeSubGroupSut.Handle(command, CancellationToken.None);
-        var getGroup = await _repository.GetGroupByIdWithSubGroupsTracking(group.Id);
+        var result = await _bus.Send(command);
+        var changed = result.Data as Group;
 
         // Assert
         Assert.AreEqual(command.IsValid, true);
         Assert.AreEqual(result.Success, true);
-        Assert.AreEqual(getGroup.SubGroups.Count, 2);
-        Assert.AreEqual(getGroup.SubGroups.First().Name, name);
+        Assert.AreEqual(changed.SubGroups.Count, 2);
+        Assert.AreEqual(changed.SubGroups.First().Name, name);
     }
 }
