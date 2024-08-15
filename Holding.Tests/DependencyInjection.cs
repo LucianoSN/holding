@@ -1,4 +1,5 @@
-﻿using Holding.Data;
+﻿using Holding.Company.Domain;
+using Holding.Data;
 using Holding.Data.Contexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
@@ -15,6 +16,7 @@ public static class DependencyInjection
             options.UseInMemoryDatabase(Guid.NewGuid().ToString()));
 
         services.AddRepository();
+        services.AddDomainCompany();
 
         return services.BuildServiceProvider();
     }
