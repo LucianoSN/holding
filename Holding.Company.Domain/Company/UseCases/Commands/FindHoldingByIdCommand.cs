@@ -11,7 +11,7 @@ public class FindHoldingByIdCommand : Notifiable<Notification>, IRequest<Generic
 {
     public FindHoldingByIdCommand(string id, string role = "")
     {
-        Id = Parser.ToGuid(id); 
+        Id = id.ToGuid(); 
         
         AddNotifications(new CustomNotification().IsGuid(id, "Id", "Id is invalid"));
         AddNotifications(new CustomNotification().HasPermission<FindHoldingPermission>(role));

@@ -7,7 +7,7 @@ public partial class CustomNotification
 {
     public Notifiable<Notification> IsGuid(string guidValue, string key, string message)
     {
-        if (!Parser.IsGuid(guidValue))
+        if (!guidValue.IsGuid())
             AddNotification(key, message);
 
         return this;

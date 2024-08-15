@@ -12,7 +12,7 @@ public class CreateGroupCommand : Notifiable<Notification>, IRequest<GenericComm
 {
     public CreateGroupCommand(string companyId, string name, string role = "")
     {
-        CompanyId = Parser.ToGuid(companyId);
+        CompanyId = companyId.ToGuid();
         Name = name;
 
         AddNotifications(new CreateGroupValidation(this));

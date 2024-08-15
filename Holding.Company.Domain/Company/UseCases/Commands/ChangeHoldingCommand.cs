@@ -17,7 +17,7 @@ public class ChangeHoldingCommand : Notifiable<Notification>, IRequest<GenericCo
         string role = ""
     )
     {
-        Id = Parser.ToGuid(id);
+        Id = id.ToGuid();
         Name = name;
         Description = description;
 

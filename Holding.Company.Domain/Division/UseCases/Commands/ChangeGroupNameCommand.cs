@@ -12,7 +12,7 @@ public class ChangeGroupNameCommand : Notifiable<Notification>, IRequest<Generic
 {
     public ChangeGroupNameCommand(string id, string name, string role = "")
     {
-        Id = Parser.ToGuid(id);
+        Id = id.ToGuid();
         Name = name;
         
         AddNotifications(new ChangeGroupNameValidation(this));

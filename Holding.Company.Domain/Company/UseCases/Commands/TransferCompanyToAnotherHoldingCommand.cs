@@ -11,8 +11,8 @@ public class TransferCompanyToAnotherHoldingCommand : Notifiable<Notification>, 
 {
     public TransferCompanyToAnotherHoldingCommand(string companyId, string newHoldingId, string role = "")
     {
-        CompanyId = Parser.ToGuid(companyId);
-        NewHoldingId = Parser.ToGuid(newHoldingId);
+        CompanyId = companyId.ToGuid();
+        NewHoldingId = newHoldingId.ToGuid();
         
         AddNotifications(new CustomNotification().IsGuid(companyId, "CompanyId", "CompanyId is invalid"));
         AddNotifications(new CustomNotification().IsGuid(newHoldingId, "NewHoldingId", "NewHoldingId is invalid"));

@@ -24,7 +24,7 @@ public class CreateCompanyCommand : Notifiable<Notification>, IRequest<GenericCo
         string role = ""
     )
     {
-        HoldingId = Parser.ToGuid(holdingId);
+        HoldingId = holdingId.ToGuid();
         Name = name;
 
         AddressCountry = addressCountry;

@@ -23,7 +23,7 @@ public class ChangeCompanyCommand : Notifiable<Notification>, IRequest<GenericCo
         string role = ""
     )
     {
-        Id = Parser.ToGuid(id);
+        Id = id.ToGuid();
         Name = name;
 
         AddressCountry = addressCountry;

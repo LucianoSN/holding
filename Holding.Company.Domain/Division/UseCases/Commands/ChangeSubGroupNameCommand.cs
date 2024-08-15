@@ -12,8 +12,8 @@ public class ChangeSubGroupNameCommand : Notifiable<Notification>, IRequest<Gene
 {
     public ChangeSubGroupNameCommand(string id, string groupId, string name, string role = "")
     {
-        Id = Parser.ToGuid(id);
-        GroupId = Parser.ToGuid(groupId);
+        Id = id.ToGuid();
+        GroupId = groupId.ToGuid();
         Name = name;
 
         AddNotifications(new ChangeSubGroupNameValidation(this));

@@ -12,7 +12,7 @@ public class CreateSubGroupCommand : Notifiable<Notification>, IRequest<GenericC
 {
     public CreateSubGroupCommand(string groupId, string name, string role = "")
     {
-        GroupId = Parser.ToGuid(groupId);
+        GroupId = groupId.ToGuid();
         Name = name;
         
         AddNotifications(new CreateSubGroupValidation(this));
