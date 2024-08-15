@@ -37,12 +37,7 @@ public class ChangeCompanyCommand : Notifiable<Notification>, IRequest<GenericCo
 
         AddNotifications(new ChangeCompanyValidation(this));
         AddNotifications(new CustomNotification().IsGuid(id, "Id", "Id is invalid"));
-        
-        AddNotifications(
-            new CustomNotification().HasPermission(
-                new ChangeCompanyPermission(Parser.ToRole(role))
-            )
-        );
+        AddNotifications(new CustomNotification().HasPermission<ChangeCompanyPermission>(role));
     }
 
     public Guid Id { get; private set; }

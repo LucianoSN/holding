@@ -14,12 +14,7 @@ public class FindCompanyByIdCommand : Notifiable<Notification>, IRequest<Generic
         Id = Parser.ToGuid(id);
 
         AddNotifications(new CustomNotification().IsGuid(id, "Id", "Id is invalid"));
-
-        AddNotifications(
-            new CustomNotification().HasPermission(
-                new FindCompanyPermission(Parser.ToRole(role))
-            )
-        );
+        AddNotifications(new CustomNotification().HasPermission<FindCompanyPermission>(role));
     }
 
     public Guid Id { get; private set; }

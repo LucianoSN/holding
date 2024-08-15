@@ -23,12 +23,7 @@ public class ChangeHoldingCommand : Notifiable<Notification>, IRequest<GenericCo
 
         AddNotifications(new ChangeHoldingValidation(this));
         AddNotifications(new CustomNotification().IsGuid(id, "Id", "Id is invalid"));
-
-        AddNotifications(
-            new CustomNotification().HasPermission(
-                new ChangeHoldingPermission(Parser.ToRole(role))
-            )
-        );
+        AddNotifications(new CustomNotification().HasPermission<ChangeHoldingPermission>(role));
     }
 
     public Guid Id { get; private set; }

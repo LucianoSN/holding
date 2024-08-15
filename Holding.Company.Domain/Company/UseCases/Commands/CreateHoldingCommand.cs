@@ -16,12 +16,7 @@ public class CreateHoldingCommand : Notifiable<Notification>, IRequest<GenericCo
         Description = description;
         
         AddNotifications(new CreateHoldingValidation(this));
-        
-        AddNotifications(
-            new CustomNotification().HasPermission(
-                new CreateHoldingPermission(Parser.ToRole(role))
-            )
-        );
+        AddNotifications(new CustomNotification().HasPermission<CreateHoldingPermission>(role));
     }
 
     public string Name { get; private set; }

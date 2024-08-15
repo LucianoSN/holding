@@ -17,12 +17,7 @@ public class ChangeGroupNameCommand : Notifiable<Notification>, IRequest<Generic
         
         AddNotifications(new ChangeGroupNameValidation(this));
         AddNotifications(new CustomNotification().IsGuid(id, "Id", "Id is invalid"));
-
-        AddNotifications(
-            new CustomNotification().HasPermission(
-                new ChangeGroupNamePermission(Parser.ToRole(role))
-            )
-        );
+        AddNotifications(new CustomNotification().HasPermission<ChangeGroupNamePermission>(role));
     }
 
     public Guid Id { get; private set; }

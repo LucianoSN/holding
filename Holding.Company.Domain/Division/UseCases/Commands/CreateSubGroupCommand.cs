@@ -17,12 +17,7 @@ public class CreateSubGroupCommand : Notifiable<Notification>, IRequest<GenericC
         
         AddNotifications(new CreateSubGroupValidation(this));
         AddNotifications(new CustomNotification().IsGuid(groupId, "GroupId", "GroupId is invalid"));
-
-        AddNotifications(
-            new CustomNotification().HasPermission(
-                new CreateSubGroupPermission(Parser.ToRole(role))
-            )
-        );
+        AddNotifications(new CustomNotification().HasPermission<CreateSubGroupPermission>(role));
     }
         
     public Guid GroupId { get; private set; }

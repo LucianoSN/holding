@@ -14,19 +14,14 @@ public class CreateGroupCommand : Notifiable<Notification>, IRequest<GenericComm
     {
         CompanyId = Parser.ToGuid(companyId);
         Name = name;
-        
+
         AddNotifications(new CreateGroupValidation(this));
         AddNotifications(new CustomNotification().IsGuid(companyId, "CompanyId", "CompanyId is invalid"));
-
-        AddNotifications(
-            new CustomNotification().HasPermission(
-                new CreateGroupPermission(Parser.ToRole(role))
-            )
-        );
+        AddNotifications(new CustomNotification().HasPermission<CreateGroupPermission>(role));
     }
 
     public Guid CompanyId { get; private set; }
     public string Name { get; private set; }
-    
+
     public Entities.Group ToEntity() => new(CompanyId, Name);
 }

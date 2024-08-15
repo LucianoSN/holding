@@ -13,12 +13,8 @@ public class GetAllCompaniesCommand : Notifiable<Notification>, IRequest<PagedCo
     {
         CurrentPage = currentPage;
         PageSize = pageSize;
-
-        AddNotifications(
-            new CustomNotification().HasPermission(
-                new GetAllCompaniesPermission(Parser.ToRole(role))
-            )
-        );
+        
+        AddNotifications(new CustomNotification().HasPermission<GetAllCompaniesPermission>(role));
     }
 
     public int CurrentPage { get; private set; }    

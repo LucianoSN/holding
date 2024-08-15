@@ -13,12 +13,8 @@ public class GetAllHoldingCommand : Notifiable<Notification>, IRequest<PagedComm
     {
         CurrentPage = currentPage;
         PageSize = pageSize;
-
-        AddNotifications(
-            new CustomNotification().HasPermission(
-                new GetAllHoldingPermission(Parser.ToRole(role))
-            )
-        );
+        
+        AddNotifications(new CustomNotification().HasPermission<GetAllHoldingPermission>(role));
     }
 
     public int CurrentPage { get; private set; }    

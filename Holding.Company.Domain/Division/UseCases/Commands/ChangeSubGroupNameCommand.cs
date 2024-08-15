@@ -19,12 +19,7 @@ public class ChangeSubGroupNameCommand : Notifiable<Notification>, IRequest<Gene
         AddNotifications(new ChangeSubGroupNameValidation(this));
         AddNotifications(new CustomNotification().IsGuid(id, "Id", "Id is invalid"));
         AddNotifications(new CustomNotification().IsGuid(groupId, "GroupId", "GroupId is invalid"));
-
-        AddNotifications(
-            new CustomNotification().HasPermission(
-                new ChangeSubGroupNamePermission(Parser.ToRole(role))
-            )
-        );
+        AddNotifications(new CustomNotification().HasPermission<ChangeSubGroupNamePermission>(role));
     }
 
     public Guid Id { get; private set; }
