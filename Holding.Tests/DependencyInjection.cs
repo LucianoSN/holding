@@ -12,6 +12,9 @@ public static class DependencyInjection
     {
         var services = new ServiceCollection();
         
+        // services.AddDbContext<DataContext>(options =>
+        //     options.UseInMemoryDatabase(Guid.NewGuid().ToString()));
+        
         services.AddDbContext<DataContext>(options =>
             options.UseInMemoryDatabase(Guid.NewGuid().ToString()));
 
