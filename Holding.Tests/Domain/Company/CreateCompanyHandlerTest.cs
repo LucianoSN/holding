@@ -13,7 +13,7 @@ public class CreateCompanyHandlerTest
         _bus = DependencyInjection.Get<IMediator>();
     }
     
-    private static CreateCompanyCommand SutCommand(
+    private static CreateCompanyCommand Sut(
         string holdingId,
         string name = "CompanyName",
         string addressCountry = "CountryName",
@@ -46,7 +46,7 @@ public class CreateCompanyHandlerTest
     public async Task ShouldCreateCompanyIsInvalid()
     {
         // Arrange
-        var command = SutCommand("");
+        var command = Sut("");
 
         // Act
         var result = await _bus.Send(command);
@@ -59,7 +59,7 @@ public class CreateCompanyHandlerTest
     public async Task ShouldCreateCompanyIsValid()
     {
         // Arrange
-        var command = SutCommand(Guid.NewGuid().ToString());
+        var command = Sut(Guid.NewGuid().ToString());
 
         // Act
         var result = await _bus.Send(command, CancellationToken.None);
