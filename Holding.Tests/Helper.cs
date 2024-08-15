@@ -1,7 +1,5 @@
-﻿using Holding.Company.Domain.Company.Queries;
-using Holding.Company.Domain.Division.Queries;
+﻿using Holding.Data;
 using Holding.Data.Contexts;
-using Holding.Data.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -16,16 +14,13 @@ public static class Helper
         services.AddDbContext<DataContext>(options =>
             options.UseInMemoryDatabase(Guid.NewGuid().ToString()));
 
-        services
-            .AddTransient<ICompanyRepository, CompanyRepository>()
-            .AddTransient<IGroupRepository, GroupRepository>();
+        services.AddData();
 
         return services.BuildServiceProvider();
     }
 
     public static T GetRequiredService<T>()
     {
-        var provider = Provider();
-        return provider.GetRequiredService<T>();
+        return Provider().GetRequiredService<T>();
     }
 }
