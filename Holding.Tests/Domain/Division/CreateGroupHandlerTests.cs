@@ -23,7 +23,7 @@ public class CreateGroupHandlerTests
         var command = new CreateGroupCommand(_companyId.ToString(), "");
     
         // Act
-        var result = await _bus.Send(command, CancellationToken.None);
+        var result = await _bus.Send(command);
     
         // Assert
         Assert.AreEqual(result.Success, false);

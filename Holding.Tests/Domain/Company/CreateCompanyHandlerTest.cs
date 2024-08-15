@@ -62,7 +62,7 @@ public class CreateCompanyHandlerTest
         var command = Sut(Guid.NewGuid().ToString());
 
         // Act
-        var result = await _bus.Send(command, CancellationToken.None);
+        var result = await _bus.Send(command);
         var company = result.Data as Holding.Company.Domain.Company.Entities.Company;
 
         // Assert
