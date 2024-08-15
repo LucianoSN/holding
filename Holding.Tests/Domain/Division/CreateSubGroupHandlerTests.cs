@@ -15,7 +15,7 @@ public class CreateSubGroupHandlerTests
 
     public CreateSubGroupHandlerTests()
     {
-        _repository = Helper.GetRequiredService<IGroupRepository>();
+        _repository = DependencyInjection.Get<IGroupRepository>();
         _createSut = new CreateGroupHandler(_repository);
         _addSubGroupSut = new CreateSubGroupHandler(_repository);
         _companyId = Guid.NewGuid();

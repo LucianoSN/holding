@@ -13,7 +13,7 @@ public class GetAllCompaniesHandlerTests
 
     public GetAllCompaniesHandlerTests()
     {
-        _repository = Helper.GetRequiredService<ICompanyRepository>();
+        _repository = DependencyInjection.Get<ICompanyRepository>();
         _createSut = new CreateCompanyHandler(_repository);
         _getAllSut = new GetAllCompaniesHandler(_repository);
     }

@@ -13,7 +13,7 @@ public class ChangeHoldingHandlerTests
 
     public ChangeHoldingHandlerTests()
     {
-        _repository = Helper.GetRequiredService<ICompanyRepository>();
+        _repository = DependencyInjection.Get<ICompanyRepository>();
         _createSut = new CreateHoldingHandler(_repository);
         _changeSut = new ChangeHoldingHandler(_repository);
     }

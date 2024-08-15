@@ -13,7 +13,7 @@ public class FindCompanyByIdHandlerTests
 
     public FindCompanyByIdHandlerTests()
     {
-        _repository = Helper.GetRequiredService<ICompanyRepository>();
+        _repository = DependencyInjection.Get<ICompanyRepository>();
         _createSut = new CreateCompanyHandler(_repository);
         _findSut = new FindCompanyByIdHandler(_repository);
     }

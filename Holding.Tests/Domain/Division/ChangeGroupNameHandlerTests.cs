@@ -15,7 +15,7 @@ public class ChangeGroupNameHandlerTests
 
     public ChangeGroupNameHandlerTests()
     {
-        _repository = Helper.GetRequiredService<IGroupRepository>();
+        _repository = DependencyInjection.Get<IGroupRepository>();
         _createSut = new CreateGroupHandler(_repository);
         _changeSut = new ChangeGroupNameHandler(_repository);
         _companyId = Guid.NewGuid();

@@ -14,7 +14,7 @@ public class TransferCompanyToAnotherHoldingHandlerTests
 
     public TransferCompanyToAnotherHoldingHandlerTests()
     {
-        _repository = Helper.GetRequiredService<ICompanyRepository>();
+        _repository = DependencyInjection.Get<ICompanyRepository>();
         _createSut = new CreateCompanyHandler(_repository);
         _tranferSut = new TransferCompanyToAnotherHoldingHandler(_repository);
     }

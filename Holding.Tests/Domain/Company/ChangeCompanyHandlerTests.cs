@@ -13,7 +13,7 @@ public class ChangeCompanyHandlerTests
 
     public ChangeCompanyHandlerTests()
     {
-        _repository = Helper.GetRequiredService<ICompanyRepository>();
+        _repository = DependencyInjection.Get<ICompanyRepository>();
         _createSut = new CreateCompanyHandler(_repository);
         _changeSut = new ChangeCompanyHandler(_repository);
     }

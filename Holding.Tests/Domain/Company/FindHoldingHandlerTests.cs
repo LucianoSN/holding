@@ -13,7 +13,7 @@ public class FindHoldingHandlerTests
 
     public FindHoldingHandlerTests()
     {
-        _repository = Helper.GetRequiredService<ICompanyRepository>();
+        _repository = DependencyInjection.Get<ICompanyRepository>();
         _createSut = new CreateHoldingHandler(_repository);
         _findSut = new FindHoldingByIdHandler(_repository);
     }

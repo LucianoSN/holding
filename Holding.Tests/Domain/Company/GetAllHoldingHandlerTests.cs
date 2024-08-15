@@ -12,7 +12,7 @@ public class GetAllHoldingHandlerTests
 
     public GetAllHoldingHandlerTests()
     {
-        var repository = Helper.GetRequiredService<ICompanyRepository>();
+        var repository = DependencyInjection.Get<ICompanyRepository>();
         _createSut = new CreateHoldingHandler(repository);
         _getAllSut = new GetAllHoldingHandler(repository);
     }

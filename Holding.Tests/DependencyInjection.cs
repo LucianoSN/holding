@@ -5,7 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Holding.Tests;
 
-public static class Helper
+public static class DependencyInjection
 {
     private static IServiceProvider Provider()
     {
@@ -19,7 +19,7 @@ public static class Helper
         return services.BuildServiceProvider();
     }
 
-    public static T GetRequiredService<T>()
+    public static T Get<T>()
     {
         return Provider().GetRequiredService<T>();
     }
