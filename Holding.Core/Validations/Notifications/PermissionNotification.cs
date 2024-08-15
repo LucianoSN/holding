@@ -8,7 +8,7 @@ public partial class CustomNotification
 {
     public Notifiable<Notification> HasPermission<T>(string role) where T: BasePermission
     {
-        var permission =  (T)Activator.CreateInstance(typeof(T), new object[] { role.ToRole() });
+        var permission =  (T)Activator.CreateInstance(typeof(T), new object[] { role.ToRole() })!;
         
         if (!permission.IsValid())
             AddNotification("Permission", "You do not have permission to perform this action");
