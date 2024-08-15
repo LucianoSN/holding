@@ -45,7 +45,6 @@ public class ChangeCompanyHandlerTests
         );
 
         var result = await _createSut.Handle(command, CancellationToken.None);
-        if (result.Success) await _repository.Transact.Commit();
         return result.Data as Holding.Company.Domain.Company.Entities.Company;
     }
 
