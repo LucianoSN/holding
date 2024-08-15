@@ -14,7 +14,7 @@ public static class DependencyInjection
         services.AddDbContext<DataContext>(options =>
             options.UseInMemoryDatabase(Guid.NewGuid().ToString()));
 
-        services.AddData();
+        services.AddRepository();
 
         return services.BuildServiceProvider();
     }

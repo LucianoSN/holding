@@ -7,7 +7,7 @@ namespace Holding.Data;
 
 public static class DependencyInjection
 {
-   public static IServiceCollection AddData(this IServiceCollection services)
+   public static IServiceCollection AddRepository(this IServiceCollection services)
    {
        services
            .AddTransient<ICompanyRepository, CompanyRepository>()
