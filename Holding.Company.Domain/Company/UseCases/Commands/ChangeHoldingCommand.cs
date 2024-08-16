@@ -1,5 +1,4 @@
 ﻿using Flunt.Notifications;
-using Holding.Company.Domain.Company.UseCases.Commands.Permissions;
 using Holding.Company.Domain.Company.UseCases.Commands.Validations;
 using Holding.Core.DomainObjects.Results;
 using Holding.Core.Helpers;

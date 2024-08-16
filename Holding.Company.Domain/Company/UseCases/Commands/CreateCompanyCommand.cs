@@ -1,9 +1,7 @@
 ﻿using Flunt.Notifications;
-using Holding.Company.Domain.Company.UseCases.Commands.Permissions;
 using Holding.Company.Domain.Company.UseCases.Commands.Validations;
 using Holding.Core.DomainObjects.Results;
 using Holding.Core.Helpers;
-using Holding.Core.Validations.Notifications;
 using Holding.Core.ValueObjects;
 using MediatR;
 
