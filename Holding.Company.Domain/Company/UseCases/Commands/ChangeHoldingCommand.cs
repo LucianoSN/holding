@@ -3,7 +3,6 @@ using Holding.Company.Domain.Company.UseCases.Commands.Permissions;
 using Holding.Company.Domain.Company.UseCases.Commands.Validations;
 using Holding.Core.DomainObjects.Results;
 using Holding.Core.Helpers;
-using Holding.Core.Validations.Notifications;
 using MediatR;
 
 namespace Holding.Company.Domain.Company.UseCases.Commands;
@@ -21,9 +20,7 @@ public class ChangeHoldingCommand : Notifiable<Notification>, IRequest<GenericCo
         Name = name;
         Description = description;
 
-        AddNotifications(new ChangeHoldingValidation(this));
-        AddNotifications(new CustomNotification().IsGuid(id, "Id", "Id is invalid"));
-        AddNotifications(new CustomNotification().HasPermission<ChangeHoldingPermission>(role));
+        AddNotifications(new ChangeHoldingValidation(this, id, role));
     }
 
     public Guid Id { get; private set; }

@@ -36,9 +36,7 @@ public class CreateCompanyCommand : Notifiable<Notification>, IRequest<GenericCo
         ContactEmail = contactEmail;
         ContactPhone = contactPhone;
 
-        AddNotifications(new CreateCompanyValidation(this));
-        AddNotifications(new CustomNotification().IsGuid(holdingId, "HoldingId", "HoldingId is invalid"));
-        AddNotifications(new CustomNotification().HasPermission<CreateCompanyPermission>(role));
+        AddNotifications(new CreateCompanyValidation(this, holdingId, role));
     }
 
     public Guid HoldingId { get; private set; }

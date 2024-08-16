@@ -1,10 +1,12 @@
 ﻿using Flunt.Validations;
+using Holding.Company.Domain.Company.UseCases.Commands.Permissions;
+using Holding.Core.Validations.Notifications;
 
 namespace Holding.Company.Domain.Company.UseCases.Commands.Validations;
 
 public class CreateCompanyValidation : Contract<CreateCompanyCommand>
 {
-    public CreateCompanyValidation(CreateCompanyCommand command)
+    public CreateCompanyValidation(CreateCompanyCommand command, string holdingId, string role)
     {
         Requires()
             .IsNotNullOrEmpty(command.Name, "Name", "Name is required")
@@ -34,5 +36,8 @@ public class CreateCompanyValidation : Contract<CreateCompanyCommand>
             .IsEmail(command.ContactEmail, "ContactEmail", "ContactEmail is invalid")
             .IsGreaterOrEqualsThan(command.ContactEmail.Length, 3, "ContactEmail", "ContactEmail must be at least 3 characters")
             .IsLowerOrEqualsThan(command.ContactEmail.Length, 50, "ContactEmail", "ContactEmail must be at most 50 characters");
+        
+        AddNotifications(new CustomNotification().IsGuid(holdingId, "HoldingId", "HoldingId is invalid"));
+        AddNotifications(new CustomNotification().HasPermission<CreateCompanyPermission>(role));
     } 
 }

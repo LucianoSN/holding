@@ -1,10 +1,12 @@
 ﻿using Flunt.Validations;
+using Holding.Company.Domain.Company.UseCases.Commands.Permissions;
+using Holding.Core.Validations.Notifications;
 
 namespace Holding.Company.Domain.Company.UseCases.Commands.Validations;
 
 public class ChangeCompanyValidation : Contract<ChangeCompanyCommand>
 {
-    public ChangeCompanyValidation(ChangeCompanyCommand command)
+    public ChangeCompanyValidation(ChangeCompanyCommand command, string id, string role)
     {
         Requires()
             .IsNotNullOrEmpty(command.Name, "Name", "Name is required")
@@ -34,5 +36,8 @@ public class ChangeCompanyValidation : Contract<ChangeCompanyCommand>
             .IsEmail(command.ContactEmail, "ContactEmail", "ContactEmail is invalid")
             .IsGreaterOrEqualsThan(command.ContactEmail.Length, 3, "ContactEmail", "ContactEmail must be at least 3 characters")
             .IsLowerOrEqualsThan(command.ContactEmail.Length, 50, "ContactEmail", "ContactEmail must be at most 50 characters");
+        
+        AddNotifications(new CustomNotification().IsGuid(id, "Id", "Id is invalid"));
+        AddNotifications(new CustomNotification().HasPermission<ChangeCompanyPermission>(role));
     } 
 }
