@@ -1,8 +1,7 @@
 ﻿using Flunt.Notifications;
-using Holding.Company.Domain.Company.UseCases.Commands.Permissions;
+using Holding.Company.Domain.Company.UseCases.Commands.Validations;
 using Holding.Core.DomainObjects.Results;
 using Holding.Core.Helpers;
-using Holding.Core.Validations.Notifications;
 using MediatR;
 
 namespace Holding.Company.Domain.Company.UseCases.Commands;
@@ -12,9 +11,8 @@ public class FindCompanyByIdCommand : Notifiable<Notification>, IRequest<Generic
     public FindCompanyByIdCommand(string id, string role = "")
     {
         Id = id.ToGuid();
-
-        AddNotifications(new CustomNotification().IsGuid(id, "Id", "Id is invalid"));
-        AddNotifications(new CustomNotification().HasPermission<FindCompanyPermission>(role));
+        
+        AddNotifications(new FindCompanyByIdValidation(id, role));
     }
 
     public Guid Id { get; private set; }
