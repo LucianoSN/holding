@@ -14,14 +14,14 @@ public class ChangeHoldingHandler(ICompanyRepository repository)
         // Fast Fail Validation
         if (!command.IsValid)
             return new GenericCommandResult(command.Notifications, false, "Ops, this holding is invalid");
-        
+
         // Get the holding        
         var holding = await repository.GetHoldingById(command.Id);
-        
+
         // Check if the holding exists
         if (holding == null)
             return new GenericCommandResult(null, false, "Holding not found");
-        
+
         // Update the holding
         holding.ChangeName(command.Name);
         holding.ChangeDescription(command.Description);
