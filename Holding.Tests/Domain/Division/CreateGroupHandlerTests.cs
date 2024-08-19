@@ -7,8 +7,8 @@ namespace Holding.Tests.Domain.Division;
 [TestClass]
 public class CreateGroupHandlerTests
 {
-    private IMediator _bus;
-    private Guid _companyId;
+    private readonly IMediator _bus;
+    private readonly Guid _companyId;
 
     public CreateGroupHandlerTests()
     {

@@ -18,7 +18,7 @@ public class Group : Entity, IAggregateRoot
     public Company.Entities.Company? Company { get; private set; }
 
     public string Name { get; private set; }
-    public IList<SubGroup> SubGroups { get; private set; } = new List<SubGroup>();
+    public IList<SubGroup> SubGroups { get; private set; } = [];
 
     public bool IsAccessible() => Active;
 
