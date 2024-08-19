@@ -22,7 +22,7 @@ public class CreateCompanyHandler(ICompanyRepository repository)
         
         // Save in the database
         await repository.Create(company);
-        await repository.Transact.Commit();
+        await repository.UnitOfWork.Commit();
         
         return new GenericCommandResult(company, true, "Company created");
     }

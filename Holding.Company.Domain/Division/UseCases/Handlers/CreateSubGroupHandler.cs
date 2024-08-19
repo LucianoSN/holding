@@ -33,7 +33,7 @@ public class CreateSubGroupHandler(IGroupRepository repository)
             return new GenericCommandResult(command.Notifications, false, "SubGroup already exists");
             
         await repository.Update(group);
-        await repository.Transact.Commit();
+        await repository.UnitOfWork.Commit();
 
         return new GenericCommandResult(
             subGroup,

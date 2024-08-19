@@ -45,7 +45,7 @@ public class GetAllCompaniesHandlerTests
         );
 
         var result = await _createSut.Handle(command, CancellationToken.None);
-        if (result.Success) await _repository.Transact.Commit();
+        if (result.Success) await _repository.UnitOfWork.Commit();
     }
     
     [TestMethod]
