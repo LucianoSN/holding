@@ -27,7 +27,7 @@ public class ChangeGroupNameHandler(IGroupRepository repository)
 
         // Save in the database
         await repository.Update(group);
-        await repository.UnitOfWork.Commit();
+        await repository.Persist.Commit();
 
         return new GenericCommandResult(group, true, "Group updated with success");
     }

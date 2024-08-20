@@ -22,7 +22,7 @@ public class CreateHoldingHandler(ICompanyRepository repository)
 
         // Save in the database
         await repository.Create(holding);
-        await repository.UnitOfWork.Commit();
+        await repository.Persist.Commit();
 
         return new GenericCommandResult(holding, true, "Holding created");
     }

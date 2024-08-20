@@ -13,7 +13,7 @@ public class GroupRepository(DataContext context) : IGroupRepository
         context?.Dispose();
     }
 
-    public IUnitOfWork UnitOfWork => context;
+    public IUnitOfWork Persist => context;
 
     #region Group
 
