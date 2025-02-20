@@ -11,12 +11,12 @@ public class CreateHoldingCommand : Notifiable<Notification>, IRequest<GenericCo
     {
         Name = name;
         Description = description;
-        
+
         AddNotifications(new CreateHoldingValidation(this, role));
     }
 
     public string Name { get; private set; }
     public string? Description { get; private set; }
-    
+
     public Entities.Holding ToEntity() => new(Name, Description);
 }
