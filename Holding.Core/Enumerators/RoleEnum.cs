@@ -8,5 +8,5 @@ public enum Role
     Editor,
     Participant,
     Integration,
-    Undefined
+    Undefined,
 }

@@ -1,6 +1,3 @@
 ﻿namespace Holding.Core.DomainObjects;
 
-public interface IAggregateRoot
-{
-    
-}
+public interface IAggregateRoot { }

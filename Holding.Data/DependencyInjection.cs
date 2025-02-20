@@ -7,12 +7,12 @@ namespace Holding.Data;
 
 public static class DependencyInjection
 {
-   public static IServiceCollection AddRepository(this IServiceCollection services)
-   {
-       services
-           .AddTransient<ICompanyRepository, CompanyRepository>()
-           .AddTransient<IGroupRepository, GroupRepository>();
+    public static IServiceCollection AddRepository(this IServiceCollection services)
+    {
+        services
+            .AddTransient<ICompanyRepository, CompanyRepository>()
+            .AddTransient<IGroupRepository, GroupRepository>();
 
-       return services;
-   }
-}   
+        return services;
+    }
+}
