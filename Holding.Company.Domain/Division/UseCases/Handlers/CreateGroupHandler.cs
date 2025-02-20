@@ -8,8 +8,10 @@ namespace Holding.Company.Domain.Division.UseCases.Handlers;
 public class CreateGroupHandler(IGroupRepository repository)
     : IRequestHandler<CreateGroupCommand, GenericCommandResult>
 {
-    public async Task<GenericCommandResult> Handle(CreateGroupCommand command,
-        CancellationToken cancellationToken)
+    public async Task<GenericCommandResult> Handle(
+        CreateGroupCommand command,
+        CancellationToken cancellationToken
+    )
     {
         // Fast Fail Validation
         if (!command.IsValid)

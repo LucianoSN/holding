@@ -6,14 +6,14 @@ namespace Holding.Tests.Domain.Company;
 [TestClass]
 public class FindCompanyByIdHandlerTests
 {
-    private IMediator _bus;
+    private readonly IMediator _bus;
 
     public FindCompanyByIdHandlerTests()
     {
         _bus = DependencyInjection.Get<IMediator>();
     }
 
-    private async Task<Holding.Company.Domain.Company.Entities.Company> CreateCompanySut(
+    private async Task<Holding.Company.Domain.Company.Entities.Company?> CreateCompanySut(
         string holdingId,
         string name = "CompanyName",
         string addressCountry = "CountryName",
@@ -42,13 +42,13 @@ public class FindCompanyByIdHandlerTests
         var result = await _bus.Send(command);
         return result.Data as Holding.Company.Domain.Company.Entities.Company;
     }
-    
+
     [TestMethod]
     public async Task ShoudReturnValidWhenFindCompanyByIdIsValid()
     {
         // Arrange
         var company = await CreateCompanySut(Guid.NewGuid().ToString());
-        var command = new FindCompanyByIdCommand(company.Id.ToString(), "Administrator");
+        var command = new FindCompanyByIdCommand(company!.Id.ToString(), "Administrator");
 
         // Act
         var result = await _bus.Send(command);
@@ -57,7 +57,7 @@ public class FindCompanyByIdHandlerTests
         Assert.AreEqual(command.IsValid, true);
         Assert.AreEqual(result.Success, true);
     }
-    
+
     [TestMethod]
     public async Task ShoudReturnInvalidWhenFindHoldingByIdNotFound()
     {

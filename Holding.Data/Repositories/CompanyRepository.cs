@@ -31,33 +31,35 @@ public class CompanyRepository(DataContext context) : ICompanyRepository
         return await context.Companies.FirstOrDefaultAsync(CompanyQueries.GetById(id));
     }
 
-    public async Task<IEnumerable<Company.Domain.Company.Entities.Company>>? GetCompanyByName(string name)
+    public async Task<IEnumerable<Company.Domain.Company.Entities.Company>>? GetCompanyByName(
+        string name
+    )
     {
-        return await context.Companies
-            .Where(CompanyQueries.GetByName(name))
+        return await context
+            .Companies.Where(CompanyQueries.GetByName(name))
             .OrderBy(x => x.Name)
             .ToListAsync();
     }
 
-    public async Task<IEnumerable<Company.Domain.Company.Entities.Company>> GetCompanyByHoldingId(Guid holdingId)
+    public async Task<IEnumerable<Company.Domain.Company.Entities.Company>> GetCompanyByHoldingId(
+        Guid holdingId
+    )
     {
-        return await context.Companies
-            .AsNoTracking()
+        return await context
+            .Companies.AsNoTracking()
             .Include(x => x.Holding)
             .Where(CompanyQueries.GetByHoldingId(holdingId))
             .ToListAsync();
     }
 
-    public async Task<PagedResponse<Company.Domain.Company.Entities.Company>> GetAllCompanies(int currentPage, int pageSize)
+    public async Task<PagedResponse<Company.Domain.Company.Entities.Company>> GetAllCompanies(
+        int currentPage,
+        int pageSize
+    )
     {
-        var query = context.Companies
-            .AsNoTracking()
-            .OrderBy(x => x.Name);
+        var query = context.Companies.AsNoTracking().OrderBy(x => x.Name);
 
-        var companies = await query
-            .Skip((currentPage - 1) * pageSize)
-            .Take(pageSize)
-            .ToListAsync();
+        var companies = await query.Skip((currentPage - 1) * pageSize).Take(pageSize).ToListAsync();
 
         var count = await query.CountAsync();
 
@@ -66,23 +68,27 @@ public class CompanyRepository(DataContext context) : ICompanyRepository
             Data = companies,
             TotalCount = count,
             CurrentPage = currentPage,
-            PageSize = pageSize
+            PageSize = pageSize,
         };
     }
 
-    public async Task<IEnumerable<Company.Domain.Company.Entities.Company>> GetAllCompaniesActivated()
+    public async Task<
+        IEnumerable<Company.Domain.Company.Entities.Company>
+    > GetAllCompaniesActivated()
     {
-        return await context.Companies
-            .AsNoTracking()
+        return await context
+            .Companies.AsNoTracking()
             .Where(CompanyQueries.GetAllActivated())
             .OrderBy(x => x.Name)
             .ToListAsync();
     }
 
-    public async Task<IEnumerable<Company.Domain.Company.Entities.Company>> GetAllCompaniesDeactivated()
+    public async Task<
+        IEnumerable<Company.Domain.Company.Entities.Company>
+    > GetAllCompaniesDeactivated()
     {
-        return await context.Companies
-            .AsNoTracking()
+        return await context
+            .Companies.AsNoTracking()
             .Where(CompanyQueries.GetAllDeactivated())
             .OrderBy(x => x.Name)
             .ToListAsync();
@@ -107,24 +113,24 @@ public class CompanyRepository(DataContext context) : ICompanyRepository
         return await context.Holdings.FirstOrDefaultAsync(HoldingQueries.GetById(id));
     }
 
-    public async Task<IEnumerable<Company.Domain.Company.Entities.Holding>>? GetHoldingByName(string name)
+    public async Task<IEnumerable<Company.Domain.Company.Entities.Holding>>? GetHoldingByName(
+        string name
+    )
     {
-        return await context.Holdings
-            .Where(HoldingQueries.GetByName(name))
+        return await context
+            .Holdings.Where(HoldingQueries.GetByName(name))
             .OrderBy(x => x.Name)
             .ToListAsync();
     }
 
-    public async Task<PagedResponse<Company.Domain.Company.Entities.Holding>> GetAllHoldings(int currentPage, int pageSize)
+    public async Task<PagedResponse<Company.Domain.Company.Entities.Holding>> GetAllHoldings(
+        int currentPage,
+        int pageSize
+    )
     {
-        var query = context.Holdings
-            .AsNoTracking()
-            .OrderBy(x => x.Name);
+        var query = context.Holdings.AsNoTracking().OrderBy(x => x.Name);
 
-        var holdings = await query
-            .Skip((currentPage - 1) * pageSize)
-            .Take(pageSize)
-            .ToListAsync();
+        var holdings = await query.Skip((currentPage - 1) * pageSize).Take(pageSize).ToListAsync();
 
         var count = await query.CountAsync();
 
@@ -133,23 +139,25 @@ public class CompanyRepository(DataContext context) : ICompanyRepository
             Data = holdings,
             TotalCount = count,
             CurrentPage = currentPage,
-            PageSize = pageSize
+            PageSize = pageSize,
         };
     }
 
     public async Task<IEnumerable<Company.Domain.Company.Entities.Holding>> GetAllHoldingActivated()
     {
-        return await context.Holdings
-            .AsNoTracking()
+        return await context
+            .Holdings.AsNoTracking()
             .Where(HoldingQueries.GetAllActivated())
             .OrderBy(x => x.Name)
             .ToListAsync();
     }
 
-    public async Task<IEnumerable<Company.Domain.Company.Entities.Holding>> GetAllHoldingDeactivated()
+    public async Task<
+        IEnumerable<Company.Domain.Company.Entities.Holding>
+    > GetAllHoldingDeactivated()
     {
-        return await context.Holdings
-            .AsNoTracking()
+        return await context
+            .Holdings.AsNoTracking()
             .Where(HoldingQueries.GetAllDeactivated())
             .OrderBy(x => x.Name)
             .ToListAsync();

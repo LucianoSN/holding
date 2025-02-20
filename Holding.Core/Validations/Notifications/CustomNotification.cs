@@ -2,6 +2,4 @@
 
 namespace Holding.Core.Validations.Notifications;
 
-public partial class CustomNotification : Notifiable<Notification>
-{
-}
+public partial class CustomNotification : Notifiable<Notification> { }

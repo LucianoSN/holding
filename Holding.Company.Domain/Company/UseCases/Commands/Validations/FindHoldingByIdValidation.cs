@@ -10,5 +10,5 @@ public class FindHoldingByIdValidation : Contract<FindHoldingByIdCommand>
     {
         AddNotifications(new CustomNotification().IsGuid(id, "Id", "Id is invalid"));
         AddNotifications(new CustomNotification().HasPermission<FindHoldingPermission>(role));
-    } 
+    }
 }

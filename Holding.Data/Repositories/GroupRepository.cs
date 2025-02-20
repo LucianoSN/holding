@@ -29,34 +29,29 @@ public class GroupRepository(DataContext context) : IGroupRepository
 
     public async Task<Group>? GetGroupById(Guid id)
     {
-       return await context.Groups.FirstOrDefaultAsync(GroupQueries.GetById(id));
+        return await context.Groups.FirstOrDefaultAsync(GroupQueries.GetById(id));
     }
 
     public async Task<Group>? GetGroupByIdWithSubGroupsTracking(Guid id)
     {
-       return await context.Groups
-           .Include(x => x.SubGroups)
-           .FirstOrDefaultAsync(GroupQueries.GetById(id));
+        return await context
+            .Groups.Include(x => x.SubGroups)
+            .FirstOrDefaultAsync(GroupQueries.GetById(id));
     }
 
     public async Task<IEnumerable<Group>>? GetGroupByName(string name)
     {
-        return await context.Groups
-            .Where(GroupQueries.GetByName(name))
+        return await context
+            .Groups.Where(GroupQueries.GetByName(name))
             .OrderBy(x => x.Name)
             .ToListAsync();
     }
 
     public async Task<PagedResponse<Group>> GetAllGroups(int currentPage, int pageSize)
     {
-        var query = context.Groups
-            .AsNoTracking()
-            .OrderBy(x => x.Name);
+        var query = context.Groups.AsNoTracking().OrderBy(x => x.Name);
 
-        var groups = await query
-            .Skip((currentPage - 1) * pageSize)
-            .Take(pageSize)
-            .ToListAsync();
+        var groups = await query.Skip((currentPage - 1) * pageSize).Take(pageSize).ToListAsync();
 
         var count = await query.CountAsync();
 
@@ -65,7 +60,7 @@ public class GroupRepository(DataContext context) : IGroupRepository
             Data = groups,
             TotalCount = count,
             CurrentPage = currentPage,
-            PageSize = pageSize
+            PageSize = pageSize,
         };
     }
 
@@ -80,22 +75,17 @@ public class GroupRepository(DataContext context) : IGroupRepository
 
     public async Task<IEnumerable<SubGroup>>? GetSubGroupByName(string name)
     {
-       return await context.SubGroups
-           .Where(SubGroupQueries.GetByName(name))
-           .OrderBy(x => x.Name)
-           .ToListAsync();
+        return await context
+            .SubGroups.Where(SubGroupQueries.GetByName(name))
+            .OrderBy(x => x.Name)
+            .ToListAsync();
     }
 
     public async Task<PagedResponse<SubGroup>> GetAllSubGroups(int currentPage, int pageSize)
     {
-        var query = context.SubGroups
-            .AsNoTracking()
-            .OrderBy(x => x.Name);
+        var query = context.SubGroups.AsNoTracking().OrderBy(x => x.Name);
 
-        var subGroups = await query
-            .Skip((currentPage - 1) * pageSize)
-            .Take(pageSize)
-            .ToListAsync();
+        var subGroups = await query.Skip((currentPage - 1) * pageSize).Take(pageSize).ToListAsync();
 
         var count = await query.CountAsync();
 
@@ -104,7 +94,7 @@ public class GroupRepository(DataContext context) : IGroupRepository
             Data = subGroups,
             TotalCount = count,
             CurrentPage = currentPage,
-            PageSize = pageSize
+            PageSize = pageSize,
         };
     }
 

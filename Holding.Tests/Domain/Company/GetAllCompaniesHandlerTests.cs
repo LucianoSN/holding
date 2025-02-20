@@ -17,7 +17,7 @@ public class GetAllCompaniesHandlerTests
         _createSut = new CreateCompanyHandler(_repository);
         _getAllSut = new GetAllCompaniesHandler(_repository);
     }
-    
+
     private async Task CreateCompanySut(
         string holdingId,
         string name = "CompanyName",
@@ -45,18 +45,19 @@ public class GetAllCompaniesHandlerTests
         );
 
         var result = await _createSut.Handle(command, CancellationToken.None);
-        if (result.Success) await _repository.Persist.Commit();
+        if (result.Success)
+            await _repository.Persist.Commit();
     }
-    
+
     [TestMethod]
     public async Task ShoudReturnInvalidWhenGetAllCompaniesIsEmpty()
     {
         // Arrange
         var command = new GetAllCompaniesCommand(role: "Administrator");
-    
+
         // Act
         var result = await _getAllSut.Handle(command, CancellationToken.None);
-    
+
         // Assert
         Assert.AreEqual(command.IsValid, true);
         Assert.AreEqual(result.Success, true);
@@ -69,10 +70,10 @@ public class GetAllCompaniesHandlerTests
         // Arrange
         await CreateCompanySut(Guid.NewGuid().ToString());
         var command = new GetAllCompaniesCommand(role: "Administrator");
-    
+
         // Act
         var result = await _getAllSut.Handle(command, CancellationToken.None);
-    
+
         // Assert
         Assert.AreEqual(command.IsValid, true);
         Assert.AreEqual(result.Success, true);
